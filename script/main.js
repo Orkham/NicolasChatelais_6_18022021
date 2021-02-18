@@ -29,37 +29,37 @@ class Photographer {
 
 const data = fetch("FishEyeDataFR.json")
 .then(response=>response.json())
+
+/*Récupération liste des photographes*/
 .then((response)=> {
     const photographersArray=response.photographers;
     console.log(photographersArray);
     return photographersArray;
 })
-/*.then((photographersArray)=>{
+
+/*Création d'un tableau contenant la liste de tous les photographes et leurs données*/
+.then((photographersArray)=>{
+    let photographersList =[];
     for (let photographer of photographersArray){
         //console.log(photographer.name);
-        new Photographer(
-            photographer.city,
-            photographer.country,
-            photographer.id,
-            photographer.name,
-            photographer.portrait,
-            photographer.price,
-            photographer.tagline,
-            photographer.tags,
-        );
-        //console.log(photographerCard);
-    }
-})
-.then((photographersArray)=>{
-    let photographersArrayObject = [];
-    for (let i = 0 ; i<photographersArray.length ; i++){
-        //console.log(photographersArray[i].name);
-        photographersArrayObject.push(photographersArray[i]);
+        photographersList.push(
+            new Photographer(
+                photographer.city,
+                photographer.country,
+                photographer.id,
+                photographer.name,
+                photographer.portrait,
+                photographer.price,
+                photographer.tagline,
+                photographer.tags,
+        ));
         
     }
-    console.log(photographersArrayObject);
-    return photographersArrayObject;
-})*/
+    console.log(photographersList);
+    return photographersArray;
+})
+
+/*Recréation du DOM avec les données json*/
 .then((photographersArray)=>{
     for(let i = 0 ; i < photographersArray.length ; i++){
         let newArticle= document.createElement('article');
@@ -111,7 +111,9 @@ const data = fetch("FishEyeDataFR.json")
         
     }
 })
+
 console.log(data);
+
 
 let tagsSelectedList = [];
 let tagsSelected = document.querySelectorAll(".tag");

@@ -1,0 +1,16 @@
+h1{
+    position: absolute;
+    top: 2.5rem;
+    right: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    color:#901c1c;
+    font-weight: 400;
+    font-size: 4vw;
+    
+}
+@media screen and (min-width: 800px){
+    h1{
+        font-size: 2rem;
+    }
+}
+

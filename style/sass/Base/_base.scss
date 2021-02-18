@@ -1,0 +1,35 @@
+*, *:before, *:after{
+    padding:0;
+    margin: 0 auto;
+    max-width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    
+}
+
+body{
+    max-width: 1200px;
+    display:flex;
+    flex-direction: column;
+    position: relative;
+    //width: 100vw;
+    min-width: 320px;
+}
+
+
+a{
+    text-decoration: none;
+    color:black;
+}
+
+.wrapper{
+    display:flex;
+}
+
+li{
+    list-style: none;
+}
+
+.hide{
+    display:none;
+}

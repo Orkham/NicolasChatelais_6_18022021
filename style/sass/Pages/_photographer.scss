@@ -1,0 +1,200 @@
+
+.presentation{
+    margin:1rem 1rem 0;
+    max-width: 65vw;
+    &__photographerName{
+        position: initial;
+        color:#d3573c;
+        font-size:3rem;
+    }
+    &__localisation{
+        font-family: 'DM Sans', sans-serif;
+        color:#901c1c;
+        font-size: 1rem;
+        font-weight: 400;
+        padding:0.2rem;
+    }
+    &__quote{
+        font-family: 'DM Sans', sans-serif;
+        color:#757575;
+        font-size: 1rem;
+        font-weight: 400;
+        padding:0.2rem;
+    }
+}
+.tagList{
+    display: flex;
+    justify-content: flex-start;
+    margin:0.5rem 1rem;
+    max-width: 70%;
+    li{
+        font-family: 'DM Sans', sans-serif;
+        color:#901c1c;
+        font-size: 0.9rem;
+        font-weight: 500;
+        border: 0.5px solid #e1e1e1;
+        padding:0.3rem;
+        border-radius: 20px;
+        cursor:pointer;
+        margin: 0 0.3rem;
+    }
+}
+.portraitImg{
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top:8rem;
+    right:1rem;
+}
+.contactButton{
+    width:10rem;
+    font-weight: 500;
+    text-align: center;
+    color:#fff;
+    background: #901c1c;
+    font-family: 'DM Sans', sans-serif;
+    position: fixed;
+    bottom: 5vh;
+    left: 50%;
+    margin-left:-5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+.photoInfo, .sortBy{
+    display:none;
+}
+.photoCard{
+    font-family: 'DM Sans', sans-serif;
+    img{
+        width:90vw;
+        height:14rem;
+        object-fit: cover;
+        object-position: 100% 20%;
+        border-radius: 5px;
+    }
+    figcaption{
+        display:flex;
+        justify-content: space-between;
+        margin: 0.5rem 0;
+    }
+    &__title{
+        color:#901c1c;
+        margin:0;
+    }
+    &__numbers{
+        display:flex;
+        color:#901c1c;
+        margin:0;
+        &--price{
+            margin: 0 0.5rem;
+        }
+        &--like{
+            margin-left:1rem;
+        }
+    }
+}
+
+@media screen and (min-width: 800px){
+    .photographerHeader{
+        display: block;
+        margin:1rem 0;
+    }
+    .photoInfo{
+        display:flex;
+        font-weight: 500;
+        position:fixed;
+        bottom:0;
+        right:1rem;
+        padding:1rem;
+        background-color: #db8876;
+        font-family: 'DM Sans', sans-serif;
+        width:15rem;
+        border-radius:5px 5px 0 0;
+        i{
+            padding-left:0.5rem;
+        }
+    }
+    .portraitImg{
+        height: 10rem;
+        width: 10rem;
+    }
+    /********************************/
+    /* BOX A RETRAVAILLER EN JS ??? */
+    /********************************/
+
+    .sortBy{
+        position: relative;
+        display:block;
+        margin:2rem 1rem;
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 500;
+        .selectBox{
+            position:relative;
+            display: initial;
+            overflow: hidden;
+            &__chevron{
+                color:#fff;
+                position :absolute;
+                left:120px;
+                top:2px;
+                cursor:pointer;
+                pointer-events: none;
+            }
+
+            #searchBy{
+                margin-left: 1rem;
+                font-family: 'DM Sans', sans-serif;
+                padding:0.3rem;
+                font-weight: 500;
+                width:8rem;
+                background: #901c1c;
+                color:#fff;
+                border-radius:5px;
+                cursor:pointer;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                option{
+                    font-family: 'DM Sans', sans-serif;
+                    color:blue;
+                }
+            }
+        }
+        
+    }
+    .photos{
+        display: flex;
+        flex-wrap: wrap;
+        //width:100%;
+        justify-content: space-between;
+        a{
+            width:33%;
+            .photoCard{
+                //width:73%;
+                object-fit: initial;
+                
+                margin:1rem;
+                img{
+                    width: 100%;
+                    height: 32rem;
+                    object-position:initial;
+                }
+            }
+        }
+    }
+    .contactButton{
+        position:absolute;
+        top: 9rem;
+        left:28rem;
+        bottom:initial;
+    }
+}
+@media screen and (min-width: 800px){
+    .contactButton{
+        top:10rem;
+        padding:1rem;
+    }
+}
+

@@ -249,3 +249,9 @@ View Compiled
   </div>
 </div>
 
+
+
+
+for(let tag of photographersArray[i].tags){
+  newArticle.className += tag + " "; 
+} 

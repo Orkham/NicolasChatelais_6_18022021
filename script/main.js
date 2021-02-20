@@ -11,7 +11,8 @@ class Photographer {
         portrait,
         price,
         tagline,
-        tags
+        tags/*,
+        displayPhotographer*/
     ) {
         this.city=city;
         this.country=country;
@@ -21,19 +22,74 @@ class Photographer {
         this.price=price;
         this.tagline=tagline;
         this.tags=tags;
+        this.displayPhotographer=1;
+
+        this.generatePhotographerCard = function(){
+            console.log("test");
+
+            let newArticle= document.createElement('article');
+            for(let tag of this.tags){
+                newArticle.className += tag + " "; 
+            } 
+            photographersSection.prepend(newArticle);
+            
+            let newA = document.createElement('a');
+            newA.href="photographer-page.html?id=" + this.id;
+            newArticle.prepend(newA);
+            
+            let newImg = document.createElement('img');
+            newImg.src="img/Photographers ID Photos/" + this.portrait;
+            newA.append(newImg);
+            
+            let newH2 = document.createElement('h2');
+            newH2.textContent = this.name;
+            newA.append(newH2);
+            
+            let newDiv = document.createElement("div");
+            newDiv.className = "presentation";
+            newArticle.append(newDiv);
+    
+            let newP1 = document.createElement("p");
+            newP1.className = "presentation__localisation";
+            newP1.textContent = this.city + ", " + this.country;
+            newDiv.append(newP1);
+    
+            let newP2 = document.createElement("p");
+            newP2.className = "presentation__quote";
+            newP2.textContent = this.tagline;
+            newDiv.append(newP2);
+    
+            let newP3 = document.createElement("p");
+            newP3.className = "presentation__price";
+            newP3.textContent = this.price + " €/jour";
+            newDiv.append(newP3);
+    
+            let newUl = document.createElement("ul");
+            newUl.className = "tagList";
+            newArticle.append(newUl);
+    
+            for(let tag of this.tags){
+                let newLi = document.createElement("li");
+                newUl.prepend(newLi);
+                let newA = document.createElement("a");
+                newA.className = "tag";
+                newLi.prepend(newA);
+                newA.textContent = "#" + tag;
+            }
+        }
     }
-}
+}    
 
 
 /*Récupération des données du fichiers json data*/
 
-const data = fetch("FishEyeDataFR.json")
+fetch("FishEyeDataFR.json")
 .then(response=>response.json())
 
 /*Récupération liste des photographes*/
 .then((response)=> {
     const photographersArray=response.photographers;
-    console.log(photographersArray);
+    //console.log(photographersArray);
     return photographersArray;
 })
 
@@ -51,80 +107,75 @@ const data = fetch("FishEyeDataFR.json")
                 photographer.portrait,
                 photographer.price,
                 photographer.tagline,
-                photographer.tags,
+                photographer.tags
+                
         ));
         
     }
-    console.log(photographersList);
-    return photographersArray;
+    return photographersList;
 })
 
 /*Recréation du DOM avec les données json*/
-.then((photographersArray)=>{
-    for(let i = 0 ; i < photographersArray.length ; i++){
-        let newArticle= document.createElement('article');
-        photographersSection.prepend(newArticle);
-        
-        let newA = document.createElement('a');
-        newA.href="photographer-page.html?id=" + photographersArray[i].id;
-        newArticle.prepend(newA);
-        
-        let newImg = document.createElement('img');
-        newImg.src="img/Photographers ID Photos/" + photographersArray[i].portrait;
-        newA.append(newImg);
-        
-        let newH2 = document.createElement('h2');
-        newH2.textContent = photographersArray[i].name;
-        newA.append(newH2);
-        
-        let newDiv = document.createElement("div");
-        newDiv.className = "presentation";
-        newArticle.append(newDiv);
+.then((photographersList)=>{
+    
+    for(let i = 0 ; i < photographersList.length ; i++){
 
-        let newP1 = document.createElement("p");
-        newP1.className = "presentation__localisation";
-        newP1.textContent = photographersArray[i].city + ", " + photographersArray[i].country;
-        newDiv.append(newP1);
+        photographersList[i].generatePhotographerCard()
 
-        let newP2 = document.createElement("p");
-        newP2.className = "presentation__quote";
-        newP2.textContent = photographersArray[i].tagline;
-        newDiv.append(newP2);
-
-        let newP3 = document.createElement("p");
-        newP3.className = "presentation__price";
-        newP3.textContent = photographersArray[i].price + " €/jour";
-        newDiv.append(newP3);
-
-        let newUl = document.createElement("ul");
-        newUl.className = "tagList";
-        newArticle.append(newUl);
-
-        for(let tag of photographersArray[i].tags){
-            let newLi = document.createElement("li");
-            newUl.prepend(newLi);
-            let newA = document.createElement("a");
-            newLi.prepend(newA);
-            //console.log(photographersArray[i].tags);
-            newA.textContent = "#" + tag;
-        }
         
     }
+    return photographersList;
 })
+.then((photographersList)=>{
+    
 
-console.log(data);
+    /* Ecoute des boutons tags*/
+    let tagsSelected = document.querySelectorAll(".tag");
+    //console.log(tagsSelected);
+    for(let i = 0 ; i < tagsSelected.length ; i++){
+        tagsSelected[i].addEventListener("click", saveTag);
+    }
 
+    /*Tabeau et fonction pour regrouper les tags actifs*/
+    let tagsSelectedList = [];
+    function saveTag(tag){
+        
+        let tagSelected = (tag.target.text).toLowerCase();
+        //let articlesToShow = document.querySelectorAll("." + tagSelected.substring(1));
+        let articlesList = document.getElementById("photographers").children;
+        //console.log(articlesToShow);
+        console.log(articlesList);
+        
+        if(tagsSelectedList.includes(tagSelected)){
+            /*** Version Vanilla ***/
+            /*let index = tagsSelectedList.indexOf(tagSelected);
+            tagsSelectedList.splice(index,1);*/
 
-let tagsSelectedList = [];
-let tagsSelected = document.querySelectorAll(".tag");
-for(let i = 0 ; i < tagsSelected.length ; i++){
-    tagsSelected[i].addEventListener("click", saveTag);
-}
+            /*** Version ECMAScript 6 */
+            tagsSelectedList = tagsSelectedList.filter(item => item !== tagSelected);
 
-function saveTag(tag){
-    tagsSelectedList.push(tag.target.text);
-    console.log(tagsSelectedList);
-}
+        }else{
+            tagsSelectedList.push(tagSelected);
+        }
+        console.log(tagsSelectedList);
 
+        /*Faire correspondre les tags sélectionnés et l'affichage*/
 
+        for(let i = 0 ; i < articlesList.length ; i++){
 
+            if((photographersList[i].tags).includes(tagSelected.substring(1))){
+                //console.log("show");
+                articlesList[i].style.display = "block";
+            }else{
+                //console.log("hide");
+                articlesList[i].style.display = "none";
+            }
+        }
+
+        /*for(let j = 0 ; j < articlesToShow.length ; j++){
+            console.log(articlesToShow[j]);
+            //articlesToShow
+        }*/
+    }
+    console.log(photographersList);
+});

@@ -177,18 +177,21 @@
                         <h1 class="formTitle">Contactez-moi<br>Mimi Keel</h1>
 
                         <label for="firstname">Prénom</label>
+                        <p class="missingData" id="missingFirstName">Veuillez indiquer votre prénom (2 caractères minimum)</p>
                         <input type="text" id="firstname" name="firstname">
 
                         <label for="lastname">Nom</label>
+                        <p class="missingData" id="missingLastName">Veuillez indiquer votre nom (2 caractères minimum)</p>
                         <input type="text" id="lastname" name="lastname">
 
                         <label for="email">Email</label>
+                        <p class="missingData" id="missingMail">Veuillez indiquer un email valide (fisheye@exemple.com)</p>
                         <input type="email" id="email" name="email">
 
                         <label for="message">Votre message</label>
                         <textarea name="message" id="message" cols="30" rows="6"></textarea>
 
-                        <button>Envoyer</button>
+                        <button id="envoyer">Envoyer</button>
 
                         <i class="fas fa-times closeForm" id="closeFormBtn"></i>
 

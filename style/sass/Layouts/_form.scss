@@ -20,6 +20,9 @@
         font-family: 'DM Sans', sans-serif;
         width:90%;
         position: relative;
+        .missingData{
+            display:none;
+        }
         .formTitle{
             position: initial;
             color:#000;

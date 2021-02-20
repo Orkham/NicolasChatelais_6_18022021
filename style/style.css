@@ -187,6 +187,9 @@ header ul li a {
   width: 90%;
   position: relative;
 }
+#form-modal form .missingData {
+  display: none;
+}
 #form-modal form .formTitle {
   position: initial;
   color: #000;

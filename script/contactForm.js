@@ -6,11 +6,16 @@ const envoyer = document.getElementById("envoyer");
 const firstName = document.getElementById("firstname");
 const lastName = document.getElementById("lastname");
 const email = document.getElementById("email");
+const messageContent = document.getElementById("message");
+
+const validateWindow = document.getElementById("displaySuccess");
+const closeValidate = document.getElementById("closeValidate");
 
 // CHECK VALIDATION ELEMENTS
 let firstNameValidate;
 let lastNameValidate;
 let emailValidate;
+let messageValidate;
 
 function formDisplay(){
     form.style.display = "block";
@@ -30,7 +35,8 @@ function validate(e){
     //validation des tests, envoi et reset du formulaire
     if( firstNameValidate == true &&
       lastNameValidate == true &&
-      emailValidate == true){
+      emailValidate == true &&
+      messageValidate == true){
         sendData();
         document.getElementById("contactForm").reset();
     }else{
@@ -45,6 +51,7 @@ function checkForm(){
     checkFirst(firstName.value);
     checkLast(lastName.value);
     checkEmail(email.value);
+    checkMessage(messageContent);
 }
 
 //fonction pour vérifier si un string est composé que de lettres, tirets ou apostrophes
@@ -103,6 +110,27 @@ function checkEmail(email){
     }
 }
 
+/*** VERIFICATION MESSAGE ***/
+function checkMessage(message){
+    if(message.textLength > 0){
+        document.getElementById("missingMessage").style.display = "none";
+        messageValidate = true;
+    }else{
+        document.getElementById("missingMessage").style.display = "block";
+        messageValidate = false;
+    }
+}
+
+//Gestion de la fenêtre de confirmation d'envoi
+function showValidateWindow(){
+    validateWindow.style.display = "block";
+}
+
+function closeValidateWindow(){
+    validateWindow.style.display = "none";
+}
+closeValidate.addEventListener("click", closeValidateWindow);
+
 function sendData() {
     let XHR = new XMLHttpRequest();
     let form = document.getElementById("contactForm");
@@ -110,7 +138,9 @@ function sendData() {
 
     // succès
     XHR.addEventListener('load', function() {
-        alert('Votre message a bien été transmis.');
+        showValidateWindow();
+        console.log("ok");
+        //alert('Votre message a bien été transmis.');
     });
    
     // erreur

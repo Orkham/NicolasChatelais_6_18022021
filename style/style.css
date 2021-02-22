@@ -163,9 +163,39 @@ header ul li a {
     margin-left: 14%;
   }
 }
-#displayForm {
+#displayForm, #displaySuccess {
   display: none;
   margin: 0;
+}
+
+#form-success {
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100vw;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #db8876;
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+#form-success p {
+  font-size: 2rem;
+  margin: 1rem auto;
+  text-align: center;
+  font-family: "DM Sans", sans-serif;
+}
+#form-success button {
+  padding: 1rem 3rem;
+  width: 80%;
+  font-family: "DM Sans", sans-serif;
+}
+#form-success button:hover {
+  cursor: pointer;
 }
 
 #form-modal {
@@ -236,6 +266,35 @@ header ul li a {
 }
 
 @media screen and (min-width: 800px) {
+  #displaySuccess {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    max-width: 100%;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  #displaySuccess #form-success {
+    font-family: "DM Sans", sans-serif;
+    width: 50vw;
+    left: 25%;
+    top: 5%;
+    height: inherit;
+    padding-bottom: 1rem;
+    border-radius: 5px;
+    justify-content: center;
+    animation-name: modalopen;
+    animation-duration: 1s;
+  }
+  #displaySuccess #form-success p {
+    font-size: 2rem;
+    margin: 1rem auto;
+  }
+  #displaySuccess #form-success button {
+    padding: 1rem 3rem;
+  }
+
   #displayForm {
     z-index: 1;
     position: fixed;

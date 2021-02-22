@@ -22,7 +22,8 @@ class Photographer {
         this.tags=tags;
     }
     
-}    
+}
+
 const photographersArray;
 
 async function dataRecover(){

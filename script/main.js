@@ -11,8 +11,7 @@ class Photographer {
         portrait,
         price,
         tagline,
-        tags/*,
-        displayPhotographer*/
+        tags
     ) {
         this.city=city;
         this.country=country;
@@ -22,16 +21,14 @@ class Photographer {
         this.price=price;
         this.tagline=tagline;
         this.tags=tags;
-        this.displayPhotographer=1;
 
         this.generatePhotographerCard = function(){
-            console.log("test");
-
+            
             let newArticle= document.createElement('article');
             for(let tag of this.tags){
                 newArticle.className += tag + " "; 
             } 
-            photographersSection.prepend(newArticle);
+            photographersSection.append(newArticle);
             
             let newA = document.createElement('a');
             newA.href="photographer-page.html?id=" + this.id;
@@ -108,7 +105,6 @@ fetch("FishEyeDataFR.json")
                 photographer.price,
                 photographer.tagline,
                 photographer.tags
-                
         ));
         
     }
@@ -122,7 +118,6 @@ fetch("FishEyeDataFR.json")
 
         photographersList[i].generatePhotographerCard()
 
-        
     }
     return photographersList;
 })
@@ -172,10 +167,6 @@ fetch("FishEyeDataFR.json")
             }
         }
 
-        /*for(let j = 0 ; j < articlesToShow.length ; j++){
-            console.log(articlesToShow[j]);
-            //articlesToShow
-        }*/
     }
     console.log(photographersList);
 });

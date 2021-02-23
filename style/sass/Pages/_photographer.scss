@@ -1,6 +1,6 @@
 
 .presentation{
-    margin:1rem 1rem 0;
+    margin:1rem /*1rem*/ 0;
     max-width: 65vw;
     &__photographerName{
         position: initial;
@@ -25,7 +25,7 @@
 .tagList{
     display: flex;
     justify-content: flex-start;
-    margin:0.5rem 1rem;
+    margin:0.5rem /*1rem*/0;
     max-width: 70%;
     li{
         font-family: 'DM Sans', sans-serif;
@@ -67,7 +67,7 @@
 }
 .photoCard{
     font-family: 'DM Sans', sans-serif;
-    img{
+    img,video{
         width:90vw;
         height:14rem;
         object-fit: cover;

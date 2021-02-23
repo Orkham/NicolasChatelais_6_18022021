@@ -1,58 +1,144 @@
-//const main = document.getElementById("mainSection");
 
 function firstLetterUp(str){
     return (str + '').charAt(0).toUpperCase()+str.substr(1);
 }
-
+function nameById(id){
+    switch(id){
+        case 243:
+        return "Mimi";
+        case 930:
+        return "Ellie Rose";
+        case 82:
+        return "Tracy";
+        case 527:
+        return "Nabeel";
+        case 925:
+        return "Rhode";
+        case 195:
+        return "Marcel";
+    }
+}
 class Media{
-    constructor(
-        id,
-        photographerId,
-        image,
-        tags,
-        likes,
-        date, 
-        price
-    ){
+    constructor(id, photographerId, image, video, tags, likes, date, price)
+    {
         this.id = id;
         this.photographerId = photographerId;
         this.image = image;
+        this.video = video;
         this.tags = tags;
         this.likes = likes; 
         this.date = date;
         this.price = price;
+        
+        this.transformImgTitle=function(){
+            let beautifulTitle = this.image.replace("_", " ").slice(0,-4);
+            return beautifulTitle;
+        }
+        this.name = nameById(this.photographerId);
 
-        this.generateMedia = function(){
+        this.generateImg=function(){
             const photosSection = document.getElementById("photosSection");
-            let newA= document.createElement('a');
-            newA.setAttribute("href","#");
-            photosSection.append(newA);
-
-            let newFigure = document.createElement("figure");
-            newFigure.className = "photoCard";
-            newA.append(newFigure);
-
-            let newImg = document.createElement("img");
-            newImg.className = "photoCard__img";
-            newImg.setAttribute("src", 'img/Mimi/' + this.image);
-            newFigure.append(newImg);
-
+            photosSection.innerHTML +=
+            `<a href="#">
+                <figure class="photoCard">
+                    <img src="img/${this.name}/${this.image}" alt="" class="photoCard__img"></img>
+                    <figcaption>
+                        <p class="photoCard__title">${this.transformImgTitle()}</p>
+                        <div class="photoCard__numbers">
+                            <p class="photoCard__numbers--price">${this.price} €</p>
+                            <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart"></i></p>
+                        </div>
+                    </figcaption>
+                </figure>
+            </a>`
+    
+        }
+        this.transformVideoTitle=function(){
+            let beautifulTitle = this.video.replace("_", " ").slice(0,-4);
+            return beautifulTitle;
+        }
+        this.generateVideo=function(){
+            const photosSection = document.getElementById("photosSection");
+            photosSection.innerHTML +=
+            `<a href="#">
+                <figure class="photoCard">
+                <video controls src="img/Mimi/${this.video}"  type="video/mp4 class=""></video>
+                    <figcaption>
+                        <p class="photoCard__title">${this.transformVideoTitle()}</p>
+                        <div class="photoCard__numbers">
+                            <p class="photoCard__numbers--price">${this.price} €</p>
+                            <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart"></i></p>
+                        </div>
+                    </figcaption>
+                </figure>
+            </a>`
 
         }
+
     }
 }
+/*
+class Photo extends Media{
+    constructor(id,
+        photographerId, image, tags, likes, date, price){
+            super(id, photographerId, image, tags, likes, date, price);
+        }
+    transformTitle(){
+        let beautifulTitle = this.image.replace("_", " ").slice(0,-4);
+        return beautifulTitle;
+    }
+    generateImg(){
+        const photosSection = document.getElementById("photosSection");
+        photosSection.innerHTML +=
+        `<a href="#">
+            <figure class="photoCard">
+                <img src="img/Mimi/${this.image}" alt="" class="photoCard__img"></img>
+                <figcaption>
+                    <p class="photoCard__title">${this.transformTitle()}</p>
+                    <div class="photoCard__numbers">
+                        <p class="photoCard__numbers--price">${this.price} €</p>
+                        <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart"></i></p>
+                    </div>
+                </figcaption>
+            </figure>
+        </a>`
 
+    }
+
+}
+
+class Video extends Media{
+    constructor(id,
+        photographerId, video, tags, likes, date, price){
+            super(id, photographerId, video, tags, likes, date, price);
+        }
+    transformTitle(){
+        let beautifulTitle = this.video.replace("_", " ").slice(0,-4);
+        return beautifulTitle;
+    }
+    generateVideo(){
+        const photosSection = document.getElementById("photosSection");
+        photosSection.innerHTML +=
+        `<a href="#">
+            <figure class="photoCard">
+                <video controls src="img/Mimi/${this.video}"  type="video/mp4 class=""></video>
+                <figcaption>
+                    <p class="photoCard__title">${this.transformTitle()}</p>
+                    <div class="photoCard__numbers">
+                        <p class="photoCard__numbers--price">${this.price} €</p>
+                        <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart"></i></p>
+                    </div>
+                </figcaption>
+            </figure>
+        </a>`
+
+    }
+
+}
+*/
 class Photographer {
-    constructor(
-        city,
-        country,
-        id,
-        name,
-        portrait,
-        price,
-        tagline,
-        tags
-    ) {
+    constructor(city, country, id, name, portrait, price, tagline,tags) 
+    {
         this.city=city;
         this.country=country;
         this.id=id;
@@ -121,10 +207,13 @@ fetch("FishEyeDataFR.json")
     const address = window.location.toString();
     const url = new URL(address);
     const idPhotographer = url.searchParams.get("id");
+    let activePhotographerName;
     
     for (let i = 0 ; i < photographersList.length ; i++){
         if (photographersList[i].id == idPhotographer){
             photographersList[i].generatePhotographerPage();
+            activePhotographerName = photographersList[i].name;
+            //console.log(activePhotographerName);
         }
     }
 
@@ -138,6 +227,7 @@ fetch("FishEyeDataFR.json")
                 media.id,
                 media.photographerId,
                 media.image,
+                media.video,
                 media.tags,
                 media.likes,
                 media.price,
@@ -146,9 +236,18 @@ fetch("FishEyeDataFR.json")
     }
     for (let i = 0 ; i < mediasList.length ; i++){
         if (mediasList[i].photographerId == idPhotographer){
-            //console.log("ok");
-            mediasList[i].generateMedia();
+            switch(mediasList[i].image){
+                case undefined:
+                console.log("video");
+                mediasList[i].generateVideo();
+                break;
+                default:
+                mediasList[i].generateImg();
+                //console.log(mediasList[i])
+            }
         }
     }
+    console.log(photographersList);
+    console.log(activePhotographerName);
 })
 

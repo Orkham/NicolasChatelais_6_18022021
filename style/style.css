@@ -32,6 +32,10 @@ li {
   display: none;
 }
 
+#mainSection {
+  max-width: 100%;
+}
+
 header {
   margin: 1rem 1rem;
 }
@@ -432,6 +436,27 @@ h1 {
     font-size: 2rem;
   }
 }
+.select {
+  color: white;
+  background-color: #901c1c;
+  width: 8rem;
+  padding: 1rem;
+}
+.select .option {
+  font-family: "DM Sans", sans-serif;
+  padding: 1rem;
+}
+.select .option:first-child, .select .option:nth-child(2) {
+  border-bottom: 1px solid white;
+}
+.select .option:nth-child(n+2) {
+  display: none;
+}
+
+.chevronDown {
+  color: white;
+}
+
 .presentation {
   margin: 1rem 1rem 0;
   max-width: 65vw;
@@ -508,7 +533,7 @@ h1 {
   margin: 5vw;
 }
 .photoCard img, .photoCard video {
-  width: 90vw;
+  width: 100%;
   height: 14rem;
   object-fit: cover;
   object-position: 100% 20%;
@@ -522,11 +547,15 @@ h1 {
 .photoCard__title {
   color: #901c1c;
   margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .photoCard__numbers {
   display: flex;
   color: #901c1c;
   margin: 0;
+  white-space: nowrap;
 }
 .photoCard__numbers--price {
   margin: 0 0.5rem;
@@ -616,6 +645,9 @@ h1 {
   .photos a .photoCard {
     object-fit: initial;
     margin: 1rem;
+  }
+  .photos a .photoCard__numbers {
+    white-space: nowrap;
   }
   .photos a .photoCard img, .photos a .photoCard video {
     width: 100%;

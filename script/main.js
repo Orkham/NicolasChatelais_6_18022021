@@ -36,6 +36,7 @@ class Photographer {
             
             let newImg = document.createElement('img');
             newImg.src="img/Photographers ID Photos/" + this.portrait;
+            newImg.setAttribute("alt", this.name);
             newA.append(newImg);
             
             let newH2 = document.createElement('h2');
@@ -70,6 +71,7 @@ class Photographer {
                 newUl.prepend(newLi);
                 let newA = document.createElement("a");
                 newA.className = "tag";
+                newA.setAttribute("tabindex", "0");
                 newLi.prepend(newA);
                 newA.textContent = "#" + tag;
             }
@@ -160,7 +162,7 @@ fetch("FishEyeDataFR.json")
 
             if((photographersList[i].tags).includes(tagSelected.substring(1))){
                 //console.log("show");
-                articlesList[i].style.display = "block";
+                articlesList[i].style.display = "flex";
             }else{
                 //console.log("hide");
                 articlesList[i].style.display = "none";

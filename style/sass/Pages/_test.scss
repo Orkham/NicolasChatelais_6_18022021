@@ -1,0 +1,19 @@
+.select{
+    color: white;
+    background-color: #901c1c;
+    width: 8rem;
+    padding:1rem;
+    .option{
+        font-family: 'DM Sans', sans-serif;
+        padding:1rem;
+        &:first-child,&:nth-child(2){
+            border-bottom: 1px solid white;
+        }
+        &:nth-child(n+2){
+            display:none;
+        }
+    }
+}
+.chevronDown{
+    color:white;
+}

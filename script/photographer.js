@@ -18,6 +18,10 @@ function nameById(id){
         return "Marcel";
     }
 }
+/*function totalLikes(){
+    let totalLikes = 0;
+
+}*/
 class Media{
     constructor(id, photographerId, image, video, tags, likes, date, price)
     {
@@ -30,18 +34,23 @@ class Media{
         this.date = date;
         this.price = price;
         
-        this.transformImgTitle=function(){
+        this.transformImgTitle = function(){
             let beautifulTitle = this.image.replace("_", " ").slice(0,-4);
             return beautifulTitle;
         }
         this.name = nameById(this.photographerId);
-
-        this.generateImg=function(){
+        this.totalLikes = function(){
+            let totalLikes = 0;
+            return totalLikes;
+        }
+        this.generateImg = function(){
             const photosSection = document.getElementById("photosSection");
+            console.log(this.price);
+            console.log(this.name);
             photosSection.innerHTML +=
             `<a href="#">
                 <figure class="photoCard">
-                    <img src="img/${this.name}/${this.image}" alt="" class="photoCard__img"></img>
+                    <img src="img/${this.name}/${this.image}" alt="" class="photoCard__img" loading="lazy"></img>
                     <figcaption>
                         <p class="photoCard__title">${this.transformImgTitle()}</p>
                         <div class="photoCard__numbers">
@@ -62,7 +71,7 @@ class Media{
             photosSection.innerHTML +=
             `<a href="#">
                 <figure class="photoCard">
-                <video controls src="img/Mimi/${this.video}"  type="video/mp4 class=""></video>
+                <video controls src="img/${this.name}/${this.video}"  type="video/mp4 class=""></video>
                     <figcaption>
                         <p class="photoCard__title">${this.transformVideoTitle()}</p>
                         <div class="photoCard__numbers">
@@ -171,6 +180,7 @@ class Photographer {
 
             portrait.setAttribute("src", "img/Photographers ID Photos/" + this.portrait);
             portrait.setAttribute("alt", this.portrait.slice(0,-4));
+
         }
         
     }
@@ -208,12 +218,16 @@ fetch("FishEyeDataFR.json")
     const url = new URL(address);
     const idPhotographer = url.searchParams.get("id");
     let activePhotographerName;
-    
+    let likesNumber = document.getElementById("likesNumber");
+    const dailyPrice = document.getElementById("price");
+    let likes = 0;
+
     for (let i = 0 ; i < photographersList.length ; i++){
         if (photographersList[i].id == idPhotographer){
             photographersList[i].generatePhotographerPage();
             activePhotographerName = photographersList[i].name;
-            //console.log(activePhotographerName);
+            /*Tarif journalier*/
+            dailyPrice.textContent = photographersList[i].price;
         }
     }
 
@@ -230,24 +244,26 @@ fetch("FishEyeDataFR.json")
                 media.video,
                 media.tags,
                 media.likes,
-                media.price,
+                media.date,
                 media.price
         ));
     }
+
+    /*Création de la liste des photographies à afficher*/
     for (let i = 0 ; i < mediasList.length ; i++){
         if (mediasList[i].photographerId == idPhotographer){
             switch(mediasList[i].image){
                 case undefined:
-                console.log("video");
                 mediasList[i].generateVideo();
                 break;
                 default:
                 mediasList[i].generateImg();
-                //console.log(mediasList[i])
             }
+            /*Nombre total de like*/
+            likes += mediasList[i].likes;
+            likesNumber.innerHTML = likes + '<i class="fas fa-heart"></i>';
         }
     }
-    console.log(photographersList);
-    console.log(activePhotographerName);
+    
 })
 

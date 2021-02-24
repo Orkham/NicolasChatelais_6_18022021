@@ -69,7 +69,7 @@
     font-family: 'DM Sans', sans-serif;
     margin: 5vw;
     img,video{
-        width:90vw;
+        width:100%;
         height:14rem;
         
         object-fit: cover;
@@ -84,11 +84,15 @@
     &__title{
         color:#901c1c;
         margin:0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
     &__numbers{
         display:flex;
         color:#901c1c;
         margin:0;
+        white-space: nowrap;
         &--price{
             margin: 0 0.5rem;
         }
@@ -177,7 +181,9 @@
             .photoCard{
                 //width:73%;
                 object-fit: initial;
-                
+                &__numbers{
+                    white-space: nowrap;
+                }
                 margin:1rem;
                 img,video{
                     width: 100%;

@@ -1,0 +1,59 @@
+/*
+class Photo extends Media{
+    constructor(id,
+        photographerId, image, tags, likes, date, price){
+            super(id, photographerId, image, tags, likes, date, price);
+        }
+    transformTitle(){
+        let beautifulTitle = this.image.replace("_", " ").slice(0,-4);
+        return beautifulTitle;
+    }
+    generateImg(){
+        const photosSection = document.getElementById("photosSection");
+        photosSection.innerHTML +=
+        `<a href="#">
+            <figure class="photoCard">
+                <img src="img/Mimi/${this.image}" alt="" class="photoCard__img"></img>
+                <figcaption>
+                    <p class="photoCard__title">${this.transformTitle()}</p>
+                    <div class="photoCard__numbers">
+                        <p class="photoCard__numbers--price">${this.price} €</p>
+                        <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart"></i></p>
+                    </div>
+                </figcaption>
+            </figure>
+        </a>`
+
+    }
+
+}
+
+class Video extends Media{
+    constructor(id,
+        photographerId, video, tags, likes, date, price){
+            super(id, photographerId, video, tags, likes, date, price);
+        }
+    transformTitle(){
+        let beautifulTitle = this.video.replace("_", " ").slice(0,-4);
+        return beautifulTitle;
+    }
+    generateVideo(){
+        const photosSection = document.getElementById("photosSection");
+        photosSection.innerHTML +=
+        `<a href="#">
+            <figure class="photoCard">
+                <video controls src="img/Mimi/${this.video}"  type="video/mp4 class=""></video>
+                <figcaption>
+                    <p class="photoCard__title">${this.transformTitle()}</p>
+                    <div class="photoCard__numbers">
+                        <p class="photoCard__numbers--price">${this.price} €</p>
+                        <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart"></i></p>
+                    </div>
+                </figcaption>
+            </figure>
+        </a>`
+
+    }
+
+}
+*/

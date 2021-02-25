@@ -27,7 +27,7 @@ header{
     }
     ul{
         display: flex;
-        justify-content: center;
+        justify-content: center;        
         //flex-direction: row;
         flex-wrap: wrap;
         //padding-left: 3rem;
@@ -45,7 +45,12 @@ header{
             font-weight: 400;
             font-size: 0.8rem;
             //margin: 1rem 0.2rem;
+            &:focus, &:hover{
+                color:white;
+                background-color: #901c1c;
+            }
         }
+        
     }
 }
 

@@ -80,6 +80,10 @@ header ul li a {
   font-weight: 400;
   font-size: 0.8rem;
 }
+header ul li a:focus, header ul li a:hover {
+  color: white;
+  background-color: #901c1c;
+}
 
 @media screen and (min-width: 1200px) {
   header {
@@ -498,6 +502,12 @@ h1 {
   cursor: pointer;
   margin: 0 0.3rem;
 }
+.tagList li:focus, .tagList li:hover {
+  background-color: #901c1c;
+}
+.tagList li:focus a, .tagList li:hover a {
+  color: white;
+}
 
 .portraitImg {
   height: 6rem;
@@ -522,6 +532,10 @@ h1 {
   margin-left: -5rem;
   padding: 0.5rem;
   border-radius: 5px;
+}
+.contactButton:hover, .contactButton:focus {
+  background-color: #d3573c;
+  color: #901c1c;
 }
 
 .photoInfo, .sortBy {

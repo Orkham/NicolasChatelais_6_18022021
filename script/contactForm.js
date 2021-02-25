@@ -1,6 +1,8 @@
 const contactBtn = document.getElementById("contactBtn");
 const closeFormBtn = document.getElementById("closeFormBtn");
 const form = document.getElementById("displayForm");
+const header = document.getElementById("photographerHeader");
+const mainPage = document.getElementById("mainSection");
 const envoyer = document.getElementById("envoyer");
 
 const firstName = document.getElementById("firstname");
@@ -19,11 +21,20 @@ let messageValidate;
 
 function formDisplay(){
     form.style.display = "block";
+    form.setAttribute("aria-hidden", false);
+    mainPage.setAttribute("aria-hidden", true);
+    header.setAttribute("aria-hidden", true);
+    closeFormBtn.focus();
+    giveFocus();
 }
 contactBtn.addEventListener("click", formDisplay);
 
 function closeForm(){
     form.style.display="none";
+    form.setAttribute("aria-hidden", true);
+    mainPage.setAttribute("aria-hidden", false);
+    header.setAttribute("aria-hidden", false);
+    contactBtn.focus();
 }
 closeFormBtn.addEventListener("click", closeForm);
 
@@ -157,3 +168,13 @@ function sendData() {
     closeForm();
 }  
 
+const focusableItems = document.querySelectorAll(".focusable");
+console.log(focusableItems);
+function giveFocus(){
+    focusableItems[0].focus();
+    console.log("focus");
+}
+
+console.log(focusableItems[5]);
+focusableItems[0].addEventListener("blur", console.log("test"),true);
+focusableItems[4].addEventListener("blur", giveFocus, true);

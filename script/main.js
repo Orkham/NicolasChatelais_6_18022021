@@ -171,4 +171,18 @@ fetch("FishEyeDataFR.json")
 
     }
     console.log(photographersList);
+    
+    /*Fonction skip to content*/
+    const skipToContent = document.getElementById("skipToContent");
+    document.addEventListener("keydown", shortcutToMain);
+
+    function shortcutToMain(e) {
+        
+        if(e.keyCode == '9')
+        {
+            skipToContent.style.display = "block";
+            skipToContent.focus();
+            document.removeEventListener("keydown", shortcutToMain);
+        }
+    }
 });

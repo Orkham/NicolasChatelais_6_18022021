@@ -1,5 +1,7 @@
 header{
     margin: 1rem 1rem;
+    display:flex;
+
     img{
         margin:1rem 0;
         width:10rem;
@@ -7,8 +9,10 @@ header{
     .skipToContent{
         background-color: #db8876;
         padding: 0.3rem;
-        position: absolute;
-        top:1rem;
+        //position: absolute;
+        position: fixed;
+        //position: -webkit-sticky;
+        top:0.1rem;
         left:50%;
         margin:auto;
         width:10rem;
@@ -54,7 +58,7 @@ header{
     }
 }
 
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 800px){
     header{
         display: flex;
         width:71%;
@@ -62,7 +66,7 @@ header{
         align-items: center;
         img{
             width:15rem;
-            margin:1rem;
+            margin:1rem 0;
         }
 
     }

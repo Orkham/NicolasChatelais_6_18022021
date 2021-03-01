@@ -29,6 +29,24 @@ function formDisplay(){
 }
 contactBtn.addEventListener("click", formDisplay);
 
+//Gestion de la fenêtre de confirmation d'envoi
+function showValidateWindow(){
+    validateWindow.style.display = "block";
+    validateWindow.setAttribute("aria-hidden", false);
+    mainPage.setAttribute("aria-hidden", true);
+    header.setAttribute("aria-hidden", true);
+    closeValidate.focus();
+}
+
+function closeValidateWindow(){
+    validateWindow.style.display = "none";
+    validateWindow.setAttribute("aria-hidden", true);
+    mainPage.setAttribute("aria-hidden", false);
+    header.setAttribute("aria-hidden", false);
+    contactBtn.focus();
+}
+closeValidate.addEventListener("click", closeValidateWindow);
+
 function closeForm(){
     form.style.display="none";
     form.setAttribute("aria-hidden", true);
@@ -59,10 +77,10 @@ function validate(e){
   envoyer.addEventListener("click",validate);
 
 function checkForm(){
-    checkFirst(firstName.value);
-    checkLast(lastName.value);
-    checkEmail(email.value);
     checkMessage(messageContent);
+    checkEmail(email.value);
+    checkLast(lastName.value);
+    checkFirst(firstName.value);
 }
 
 //fonction pour vérifier si un string est composé que de lettres, tirets ou apostrophes
@@ -89,6 +107,7 @@ function checkFirst(data){
         firstNameValidate = true;
     }else{
         document.getElementById("missingFirstName").style.display = "block";
+        firstName.focus();
         firstNameValidate = false;
     }
 }
@@ -100,6 +119,7 @@ function checkLast(data){
         lastNameValidate = true;
     }else{
         document.getElementById("missingLastName").style.display = "block";
+        lastName.focus();
         lastNameValidate = false;
     }
 }
@@ -111,12 +131,13 @@ function validateEmail(email){
     return emailPattern.test(email); 
 } 
 
-function checkEmail(email){
-    if(validateEmail(email)){
+function checkEmail(mail){
+    if(validateEmail(mail)){
         document.getElementById("missingMail").style.display = "none";
         emailValidate = true;
     }else{
         document.getElementById("missingMail").style.display = "block";
+        email.focus();
         emailValidate = false;
     }
 }
@@ -128,19 +149,12 @@ function checkMessage(message){
         messageValidate = true;
     }else{
         document.getElementById("missingMessage").style.display = "block";
+        messageContent.focus();
         messageValidate = false;
     }
 }
 
-//Gestion de la fenêtre de confirmation d'envoi
-function showValidateWindow(){
-    validateWindow.style.display = "block";
-}
 
-function closeValidateWindow(){
-    validateWindow.style.display = "none";
-}
-closeValidate.addEventListener("click", closeValidateWindow);
 
 function sendData() {
     let XHR = new XMLHttpRequest();
@@ -150,8 +164,6 @@ function sendData() {
     // succès
     XHR.addEventListener('load', function() {
         showValidateWindow();
-        console.log("ok");
-        //alert('Votre message a bien été transmis.');
     });
    
     // erreur
@@ -164,17 +176,37 @@ function sendData() {
 
     // Envoi
     XHR.send(FD); 
-
     closeForm();
 }  
 
 const focusableItems = document.querySelectorAll(".focusable");
-console.log(focusableItems);
+//console.log(focusableItems);
 function giveFocus(){
     focusableItems[0].focus();
     console.log("focus");
 }
 
-console.log(focusableItems[5]);
-focusableItems[0].addEventListener("blur", console.log("test"),true);
-focusableItems[4].addEventListener("blur", giveFocus, true);
+focusableItems[5].addEventListener("blur", giveFocus);
+
+function myFunction (event) {
+    let x = event.keyCode;
+    if (x == 27) {// 27 touche ESC est
+    alert ( "Vous avez appuyé sur la touche Echap !");
+    }
+} 
+closeFormBtn.addEventListener("click", myFunction);
+
+form.addEventListener('keyup', function (event) {
+    if (event.key === 'Escape') {
+        closeForm();
+    }
+    if (event.key === 'Enter') {
+        validate(event);
+    }
+  });
+
+  validateWindow.addEventListener('keyup', function(event){
+      if(event.key === 'Escape' || event.key === 'Enter'){
+        closeValidateWindow();
+      }
+  })

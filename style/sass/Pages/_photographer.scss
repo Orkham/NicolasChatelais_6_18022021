@@ -1,7 +1,7 @@
 
 .presentation{
     margin:1rem 1rem 0;
-    max-width: 65vw;
+    //max-width: 65vw;
     &__photographerName{
         position: initial;
         color:#d3573c;
@@ -51,7 +51,7 @@
     border-radius: 50%;
     object-fit: cover;
     position: absolute;
-    top:8rem;
+    top:9.5rem;
     right:1rem;
 }
 .contactButton{
@@ -72,16 +72,20 @@
         color:#901c1c;
     }
 }
+.photos{
+    margin:0.5rem;
+}
 .photoInfo, .sortBy{
     display:none;
 }
 .photoCard{
     font-family: 'DM Sans', sans-serif;
-    margin: 5vw;
+    //margin: 5vw;
+    width:100%;
+    margin:auto;
     img,video{
         width:100%;
         height:14rem;
-        
         object-fit: cover;
         object-position: 100% 20%;
         border-radius: 5px;
@@ -107,23 +111,29 @@
             margin: 0 0.5rem;
         }
         &--like{
-            margin-left:1rem;
+            margin: 0 0 0 1rem;
+            
         }
     }
 }
 
 @media screen and (min-width: 800px){
+    
+    .box{
+        background-color:#fafafa;
+        padding:2rem 0;
+    }
     .photographerHeader{
         display: block;
         margin:1rem 0;
     }
     .photoInfo{
         display:flex;
+        justify-content: space-around;
         font-weight: 500;
         position:fixed;
         bottom:0;
         right:1rem;
-        padding:1rem;
         background-color: #db8876;
         font-family: 'DM Sans', sans-serif;
         width:15rem;
@@ -143,7 +153,7 @@
     .sortBy{
         position: relative;
         display:block;
-        margin:2rem 1rem;
+        margin:1rem 0;
         font-family: 'DM Sans', sans-serif;
         font-weight: 500;
         .selectBox{
@@ -180,41 +190,45 @@
         }
         
     }
+    .photoCard{
+        width:30%;
+        margin:0;
+        margin-bottom: 1rem;
+        object-fit: initial;
+        img,video{
+            width: 100%;
+            height: 21rem;
+            object-position:initial;
+        }
+    }
     .photos{
         display: flex;
         flex-wrap: wrap;
-        //width:100%;
         justify-content: space-between;
+        margin:0;
         a{
-            width:33%;
+            width:30%;
             overflow: hidden;
             .photoCard{
-                //width:73%;
-                object-fit: initial;
                 &__numbers{
                     white-space: nowrap;
                 }
-                margin:1rem;
-                img,video{
-                    width: 100%;
-                    height: 32rem;
-                    object-position:initial;
-                }
-
             }
         }
     }
     .contactButton{
         position:absolute;
-        top: 9rem;
-        left:28rem;
+        top: 12rem;
+        left:33rem;
         bottom:initial;
     }
 }
+/*
 @media screen and (min-width: 800px){
     .contactButton{
         top:10rem;
         padding:1rem;
     }
 }
+*/
 

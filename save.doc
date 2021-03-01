@@ -57,3 +57,22 @@ class Video extends Media{
 
 }
 */
+
+/*function displayMedias(array){
+        for (let i = 0 ; i < array.length ; i++){
+            switch(array[i].image){
+                case undefined:
+                    array[i].generateVideo();
+                break;
+                default:
+                    array[i].generateImg();
+            }
+
+            /*Nombre total de like*/
+            /*
+            likes += array[i].likes;
+            likesNumber.innerHTML = likes + '<i class="fas fa-heart"></i>';
+            
+        }
+        console.log(mediasList);
+    }*/

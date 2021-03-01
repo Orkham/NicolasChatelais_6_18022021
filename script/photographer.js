@@ -1,4 +1,8 @@
 
+const photosSection = document.getElementById("photosSection");
+let likes = 0;
+let likesNumber = document.getElementById("likesNumber");
+
 function firstLetterUp(str){
     return (str + '').charAt(0).toUpperCase()+str.substr(1);
 }
@@ -18,6 +22,33 @@ function nameById(id){
         return "Marcel";
     }
 }
+function displayMedias(array){
+    for (let i = 0 ; i < array.length ; i++){
+        switch(array[i].image){
+            case undefined:
+                array[i].generateVideo();
+            break;
+            default:
+                array[i].generateImg();
+        }
+
+        /*Nombre total de like*/
+        likes += array[i].likes;
+        likesNumber.innerHTML = likes + '<i class="fas fa-heart"></i>';
+        
+    }
+    console.log(array);
+}
+function transformTitle(image,video){
+    let re = /_/g;
+    if(image){
+        let beautifulTitle = image.replace(re, " ").slice(0,-4);
+        return beautifulTitle;
+    }else{
+        let beautifulTitle = video.replace(re, " ").slice(0,-4);
+    return beautifulTitle;
+    }
+}
 
 class Media{
     constructor(id, photographerId, image, video, tags, likes, date, price)
@@ -30,56 +61,45 @@ class Media{
         this.likes = likes; 
         this.date = date;
         this.price = price;
+        this.title = transformTitle(this.image,this.video);
         
-        this.transformImgTitle = function(){
-            let beautifulTitle = this.image.replace("_", " ").slice(0,-4);
-            return beautifulTitle;
-        }
         this.name = nameById(this.photographerId);
         this.totalLikes = function(){
             let totalLikes = 0;
             return totalLikes;
         }
         this.generateImg = function(){
-            const photosSection = document.getElementById("photosSection");
             
             photosSection.innerHTML +=
-            `<a href="#">
-                <figure class="photoCard">
+            `<figure class="photoCard">
+                <a href="#">
                     <img src="img/${this.name}/${this.image}" alt="" class="photoCard__img" loading="lazy"></img>
-                    <figcaption>
-                        <p class="photoCard__title">${this.transformImgTitle()}</p>
-                        <div class="photoCard__numbers">
-                            <p class="photoCard__numbers--price">${this.price} €</p>
-                            <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart"></i></p>
-                        </div>
-                    </figcaption>
-                </figure>
-            </a>`
-    
+                </a>
+                <figcaption>
+                    <p class="photoCard__title">${this.title}</p>
+                    <div class="photoCard__numbers">
+                        <p class="photoCard__numbers--price">${this.price} €</p>
+                        <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart"></i></p>
+                    </div>
+                </figcaption>
+            </figure>`
         }
-        this.transformVideoTitle=function(){
-            let beautifulTitle = this.video.replace("_", " ").slice(0,-4);
-            return beautifulTitle;
-        }
+        
         this.generateVideo=function(){
-            const photosSection = document.getElementById("photosSection");
             photosSection.innerHTML +=
-            `<a href="#">
-                <figure class="photoCard">
-                <video controls src="img/${this.name}/${this.video}"  type="video/mp4 class=""></video>
-                    <figcaption>
-                        <p class="photoCard__title">${this.transformVideoTitle()}</p>
-                        <div class="photoCard__numbers">
-                            <p class="photoCard__numbers--price">${this.price} €</p>
-                            <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart"></i></p>
-                        </div>
-                    </figcaption>
-                </figure>
-            </a>`
-
+            `<figure class="photoCard">
+                <a href="#">
+                    <video controls src="img/${this.name}/${this.video}"  type="video/mp4 class=""></video>
+                </a>
+                <figcaption>
+                    <p class="photoCard__title">${this.title}</p>
+                    <div class="photoCard__numbers">
+                        <p class="photoCard__numbers--price">${this.price} €</p>
+                        <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart"></i></p>
+                    </div>
+                </figcaption>
+            </figure>`
         }
-
     }
 }
 
@@ -163,13 +183,10 @@ fetch("FishEyeDataFR.json")
 
     /*Création de l'entête de présentation du photographe*/
 
-    let likesNumber = document.getElementById("likesNumber");
-    const dailyPrice = document.getElementById("price");
-    let likes = 0;
-
     activePhotographer.generatePhotographerPage();
 
     /*Tarif journalier*/
+    const dailyPrice = document.getElementById("price");
     dailyPrice.textContent = activePhotographer.price;
         
     /*Création de la liste des médias par photographe*/
@@ -194,20 +211,67 @@ fetch("FishEyeDataFR.json")
     }
 
     /*Création de la liste des photographies à afficher*/
-    for (let i = 0 ; i < mediasList.length ; i++){
-        switch(mediasList[i].image){
-            case undefined:
-            mediasList[i].generateVideo();
-            break;
-            default:
-            mediasList[i].generateImg();
-        }
 
-        /*Nombre total de like*/
-        likes += mediasList[i].likes;
-        likesNumber.innerHTML = likes + '<i class="fas fa-heart"></i>';
-        
+    displayMedias(mediasList);
+
+    /*Fonction tri des photo par popularité, date ou tri*/
+    let searchOptionSelected = document.getElementById("searchBy");
+    //console.log(searchOptionSelected.value);
+    function sortByOption(){
+        photosSection.innerHTML = "";
+        likesNumber = 0;
+        switch(searchOptionSelected.value){
+            case "Popularité":
+                console.log("Popularité");
+                mediasList.sort(function(a,b){
+                    return b.likes - a.likes;
+                });
+                displayMedias(mediasList)
+                break;
+            case "Date":
+                console.log("Date");
+                mediasList.sort(function(a,b){
+                    if (a.date < b.date)
+                        return -1;
+                    if (a.date > b.date)
+                        return 1;
+                    return 0;
+                });
+                displayMedias(mediasList)
+                break;
+            case "Titre":
+                console.log("Titre");
+                mediasList.sort(function(a,b){
+                    if (a.title < b.title)
+                        return -1;
+                    if (a.title > b.title )
+                        return 1;
+                    return 0;
+                });
+                displayMedias(mediasList)
+                break;
+        }
     }
-    
+    searchOptionSelected.addEventListener("change",sortByOption); 
+
+    /*Fonction skip to content*/
+    const skipToContent = document.getElementById("skipToContent");
+    document.addEventListener("keydown", shortcutToMain);
+
+    function shortcutToMain(e) {
+        
+        if(e.keyCode == '9')
+        {
+            skipToContent.style.display = "block";
+            skipToContent.focus();
+            document.removeEventListener("keydown", shortcutToMain);
+        }
+    }
+
+    const photosList = document.querySelectorAll(".photoCard__img");
+    console.log(photosList);
+    for(let i = 0 ; i < photosList.length ; i++){
+        console.log(photosList[i]);
+    }
 })
 

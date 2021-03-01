@@ -16,10 +16,6 @@
     <body>
 
         <header class="photographerHeader" id="photographerHeader">
-            
-            <div class="skipToContent">
-                <a href="#main" tabindex="0">Passer au contenu</a>
-            </div>
 
             <a href="index.html" tabindex="0">
                 <img src="img/logo.png" alt="Fisheye Home page" class="logo">
@@ -28,20 +24,21 @@
         </header>
 
         <main id="mainSection">
-            <div class="presentation" id="photographerPresentation">
-                <h1 class="presentation__photographerName" id="photographerName"></h1>
-                <p class="presentation__localisation" id="photographerLocalisation"></p>
-                <p class="presentation__quote" id="photographerQuote"></p>
+
+            <div class="box">
+                <div class="presentation" id="photographerPresentation">
+                    <h1 class="presentation__photographerName" id="photographerName"></h1>
+                    <p class="presentation__localisation" id="photographerLocalisation"></p>
+                    <p class="presentation__quote" id="photographerQuote"></p>
+                </div>
+                <ul class="tagList" id="tagList" tabindex="0"></ul>
+
+                <a href="#" class="contactButton" id="contactBtn" tabindex="0">Contactez-moi</a>
+
+                <a href="#" tabindex="0">
+                    <img src="" alt="" class="portraitImg" id="portrait">
+                </a>
             </div>
-            <ul class="tagList" id="tagList" tabindex="0">
-                
-            </ul>
-
-            <a href="#" class="contactButton" id="contactBtn" tabindex="0">Contactez-moi</a>
-
-            <a href="#" tabindex="0">
-                <img src="" alt="" class="portraitImg" id="portrait">
-            </a>
 
             <div class="photoInfo">
                 <p class="photoInfo__likes" id="likesNumber"></p>
@@ -82,15 +79,13 @@
                         </figcaption>
                     </figure>
                 </a>
-
-                -->
+-->
             </section>
 
             <div id="displayLightbox">
                 <section class="lightbox-modal">
 
                     <figure>
-                        
                         <div class="lightbox-modal__box">
                             <i class="fas fa-times closeIcon"></i>
                             <a href="#"><i class="fas fa-chevron-left"></i></a>
@@ -129,7 +124,7 @@
 
                     <button id="envoyer" class="focusable">Envoyer</button>
 
-                    <i class="fas fa-times closeForm focusable" id="closeFormBtn"></i>
+                    <i class="fas fa-times closeForm focusable" id="closeFormBtn" tabindex="0"></i>
 
                 </form>
 
@@ -140,7 +135,7 @@
             <section id="form-success">
 
                 <p>Votre message a bien été transmis.</p>
-                <button id="closeValidate">Fermer cette fenêtre et revenir à la page du photographe</button>
+                <button id="closeValidate" tabindex="0">Fermer cette fenêtre et revenir à la page du photographe</button>
 
             </section>
         </div>

@@ -1,6 +1,6 @@
 h1{
     position: absolute;
-    top: 2.5rem;
+    top: 2rem;
     right: 1rem;
     font-family: 'DM Sans', sans-serif;
     color:#901c1c;
@@ -11,6 +11,7 @@ h1{
 @media screen and (min-width: 800px){
     h1{
         font-size: 2rem;
+        top: 1.5rem;
     }
 }
 

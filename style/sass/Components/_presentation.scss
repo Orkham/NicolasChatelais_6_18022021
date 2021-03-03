@@ -18,23 +18,27 @@
             color:#d3573c;
             font-size: 2.5rem;
             font-weight: 400;
+            margin: 0 auto;
         }
         img{
             height: 14rem;
             width: 14rem;
             border-radius: 50%;
             object-fit: cover;
+            margin:auto;
         }
     }
     .presentation{
         display:flex;
         flex-direction: column;
+        margin:0.3rem auto;
         &__localisation{
             font-family: 'DM Sans', sans-serif;
             color:#901c1c;
             font-size: 1rem;
             font-weight: 400;
             padding:0.2rem;
+            margin:0 auto;
         }
         &__quote{
             font-family: 'DM Sans', sans-serif;
@@ -42,6 +46,7 @@
             font-size: 0.8rem;
             font-weight: 400;
             padding:0.2rem;
+            margin:0 auto;
         }
         &__price{
             font-family: 'DM Sans', sans-serif;
@@ -49,23 +54,32 @@
             font-size: 0.8rem;
             font-weight: 400;
             padding:0.2rem;
+            margin:0 auto;
         }
     }
-    .tagList{
+    
+    ul{
         display: flex;
-        justify-content: center;
-        //flex-wrap:wrap;
+        justify-content: center;        
+        flex-wrap: wrap;
         li{
-            margin:0.2rem;
-            font-family: 'DM Sans', sans-serif;
-            color:#757575;
-            font-size: 0.8rem;
-            font-weight: 400;
-            border: 0.5px solid #cbcbcb;
-            padding:0.5rem;
-            border-radius: 20px;
-            cursor:pointer;
-            margin: 0 0.3rem;
+            margin: 0.5rem 0.2rem;
+            button{
+                background-color:white;
+                color:#901c1c;
+                border: 0.5px solid #cbcbcb;
+                padding:0.3rem;
+                border-radius: 20px;
+                cursor:pointer;
+                font-family: 'DM Sans', sans-serif;
+                font-weight: 400;
+                font-size: 0.8rem;
+                //margin: 1rem 0.2rem;
+                &:focus, &:hover, .active, &:active{
+                    color:white;
+                    background-color: #901c1c;
+                }
+            }
         }
     }
 }

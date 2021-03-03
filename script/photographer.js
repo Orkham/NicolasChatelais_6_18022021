@@ -1,53 +1,21 @@
+import {firstLetterUp, nameById, transformTitle}  from './utils.js'
 
 const photosSection = document.getElementById("photosSection");
-let likes = 0;
-let likesNumber = document.getElementById("likesNumber");
+const likesNumber = document.getElementById("likesNumber");
+const lightbox = document.getElementById("displayLightbox");
+const lightboxModal = document.getElementById("lightbox-modal");
+const photoTitle = document.getElementById("photoTitle");
+const nextImg = document.getElementById("nextIcon");
+const prevImg = document.getElementById("prevIcon");
 
-function firstLetterUp(str){
-    return (str + '').charAt(0).toUpperCase()+str.substr(1);
-}
-function nameById(id){
-    switch(id){
-        case 243:
-        return "Mimi";
-        case 930:
-        return "Ellie Rose";
-        case 82:
-        return "Tracy";
-        case 527:
-        return "Nabeel";
-        case 925:
-        return "Rhode";
-        case 195:
-        return "Marcel";
-    }
-}
 function displayMedias(array){
+    let likes = 0;
     for (let i = 0 ; i < array.length ; i++){
-        switch(array[i].image){
-            case undefined:
-                array[i].generateVideo();
-            break;
-            default:
-                array[i].generateImg();
-        }
-
+        array[i].generateDisplay();
         /*Nombre total de like*/
         likes += array[i].likes;
-        likesNumber.innerHTML = likes + '<i class="fas fa-heart"></i>';
-        
     }
-    console.log(array);
-}
-function transformTitle(image,video){
-    let re = /_/g;
-    if(image){
-        let beautifulTitle = image.replace(re, " ").slice(0,-4);
-        return beautifulTitle;
-    }else{
-        let beautifulTitle = video.replace(re, " ").slice(0,-4);
-    return beautifulTitle;
-    }
+    likesNumber.innerHTML = likes + ' <i class="fas fa-heart"></i>';
 }
 
 class Media{
@@ -64,16 +32,22 @@ class Media{
         this.title = transformTitle(this.image,this.video);
         
         this.name = nameById(this.photographerId);
-        this.totalLikes = function(){
+        /*this.totalLikes = function(){
             let totalLikes = 0;
             return totalLikes;
+        }*/
+        this.mediaToDisplay = function(){
+            if(this.video){
+                return`<video controls src="img/${this.name}/${this.video}"  type="video/mp4" class="media" id="${this.id}"></video>`
+            }else{
+                return`<img src="img/${this.name}/${this.image}" alt="" class="photoCard__img media" loading="lazy" id="id_${this.id}"></img>`
+            }
         }
-        this.generateImg = function(){
-            
+        this.generateDisplay = function(){
             photosSection.innerHTML +=
             `<figure class="photoCard">
                 <a href="#">
-                    <img src="img/${this.name}/${this.image}" alt="" class="photoCard__img" loading="lazy"></img>
+                ${this.mediaToDisplay()}
                 </a>
                 <figcaption>
                     <p class="photoCard__title">${this.title}</p>
@@ -84,22 +58,14 @@ class Media{
                 </figcaption>
             </figure>`
         }
+
+        /*this.generateLightbox = function(){
+            lightboxModal.innerHTML = 
+            `${this.mediaToDisplay()}`;
+            photoTitle.innerHTML = `${this.title}`;
+            console.log(photoTitle.innerHTML);
+        }*/
         
-        this.generateVideo=function(){
-            photosSection.innerHTML +=
-            `<figure class="photoCard">
-                <a href="#">
-                    <video controls src="img/${this.name}/${this.video}"  type="video/mp4 class=""></video>
-                </a>
-                <figcaption>
-                    <p class="photoCard__title">${this.title}</p>
-                    <div class="photoCard__numbers">
-                        <p class="photoCard__numbers--price">${this.price} €</p>
-                        <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart"></i></p>
-                    </div>
-                </figcaption>
-            </figure>`
-        }
     }
 }
 
@@ -207,6 +173,7 @@ fetch("FishEyeDataFR.json")
                     mediasArray[i].price
                 )
             );
+            
         }
     }
 
@@ -216,10 +183,9 @@ fetch("FishEyeDataFR.json")
 
     /*Fonction tri des photo par popularité, date ou tri*/
     let searchOptionSelected = document.getElementById("searchBy");
-    //console.log(searchOptionSelected.value);
+    
     function sortByOption(){
         photosSection.innerHTML = "";
-        likesNumber = 0;
         switch(searchOptionSelected.value){
             case "Popularité":
                 console.log("Popularité");
@@ -268,10 +234,52 @@ fetch("FishEyeDataFR.json")
         }
     }
 
-    const photosList = document.querySelectorAll(".photoCard__img");
-    console.log(photosList);
-    for(let i = 0 ; i < photosList.length ; i++){
-        console.log(photosList[i]);
+    /*Affichage lightbox modal*/
+    class Lightbox{
+        constructor(medias){
+            
+            this.medias = medias,
+            
+            this.generateLightbox = function(index){
+                lightbox.style.display = "flex";
+                lightboxModal.innerHTML = `<img src="${this.medias[index].src}" alt="" class="lightbox-modal__box--photo"></img>`
+            }
+            
+        }
     }
+
+    
+    const medias = document.querySelectorAll(".media")
+    const mediasArray2 = Array.from(medias)
+    const lightboxContent = new Lightbox(
+        mediasArray2
+    )
+    console.log(lightboxContent)
+
+    mediasArray2.forEach(media => {
+        media.index = mediasArray2.indexOf(media)
+        media.addEventListener("click", function(){lightboxContent.generateLightbox(media.index)})
+        
+        
+    })
+    
+    //console.log(medias);
+    //nextImg.addEventListener("click", nextImgDisplay)
+
+    /*function nextImgDisplay(index){
+        displayLightbox(index+1)
+    }*/
+
+    /*
+    function displayLightbox(index){
+        //console.log(mediasArray2[index].src)
+        lightbox.style.display = "flex";
+        lightboxModal.innerHTML = `<img src="${mediasArray2[index].src}" alt="" class="lightbox-modal__box--photo"></img>`
+       
+    }
+*/
+    
 })
+
+
 

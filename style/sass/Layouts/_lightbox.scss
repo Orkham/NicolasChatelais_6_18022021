@@ -3,6 +3,7 @@
     display:none;  
 }
 .lightbox-modal{
+    margin:0 auto;
     overflow-y: hidden; 
     z-index: 2;
     position: fixed;
@@ -13,6 +14,7 @@
     display:flex;
     background-color: #fff;
     align-items: center;
+    justify-content: center;
     figure{
         width:auto;
     }
@@ -62,7 +64,7 @@
         &__box{
             &--photo{
                 object-fit: cover;
-                //width:75vw;
+                max-width:70vw;
                 height: 42vh;
                 object-position: 50% 25%;
             }
@@ -77,3 +79,30 @@
         }
     }
 }
+
+
+/*
+
+#lightbox {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .8);
+    display: none;
+  }
+  
+  #lightbox.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    padding: 4px;
+    background-color: black;
+    border: 2px solid white;
+  }*/

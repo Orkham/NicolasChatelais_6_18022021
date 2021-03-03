@@ -76,3 +76,94 @@ class Video extends Media{
         }
         console.log(mediasList);
     }*/
+
+    /*
+        this.generateImg = function(){
+            
+            photosSection.innerHTML +=
+            `<figure class="photoCard">
+                <a href="#">
+                    <img src="img/${this.name}/${this.image}" alt="" class="photoCard__img" loading="lazy"></img>
+                </a>
+                <figcaption>
+                    <p class="photoCard__title">${this.title}</p>
+                    <div class="photoCard__numbers">
+                        <p class="photoCard__numbers--price">${this.price} €</p>
+                        <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart"></i></p>
+                    </div>
+                </figcaption>
+            </figure>`
+ 
+        }
+        
+        this.generateVideo=function(){
+            photosSection.innerHTML +=
+            `<figure class="photoCard">
+                <a href="#">
+                    <video controls src="img/${this.name}/${this.video}"  type="video/mp4 class=""></video>
+                </a>
+                <figcaption>
+                    <p class="photoCard__title">${this.title}</p>
+                    <div class="photoCard__numbers">
+                        <p class="photoCard__numbers--price">${this.price} €</p>
+                        <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart"></i></p>
+                    </div>
+                </figcaption>
+            </figure>`
+        }
+        */
+         /*
+        switch(array[i].image){
+            case undefined:
+                array[i].generateVideo();
+            break;
+            default:
+                array[i].generateImg();
+        }
+        */
+        /*
+        /*Tabeau et fonction pour regrouper les tags actifs*/
+    let tagsSelectedList = [];
+        if(tagsSelectedList.includes(tagSelected)){
+            /*** Version Vanilla ***/
+            /*let index = tagsSelectedList.indexOf(tagSelected);
+            tagsSelectedList.splice(index,1);*/
+
+            /*** Version ECMAScript 6 */
+            /*
+            tagsSelectedList = tagsSelectedList.filter(item => item !== tagSelected);
+
+        }else{
+            tagsSelectedList.push(tagSelected);
+        }
+*/
+for(let i = 0 ; i < mediasList.length ; i++){
+        let img = document.getElementById("id_" + mediasList[i].id);
+        //console.log(test);
+            if(mediasList[i].image){
+                img.addEventListener("click", ()=>{
+                    lightbox.style.display = "flex";
+                    lightboxModal.innerHTML = 
+                    `<img src="img/${mediasList[i].name}/${mediasList[i].image}" alt="${mediasList[i].title}" class="lightbox-modal__box--photo" id="${mediasList[i].id}"></img>`
+                })
+            }else{
+                lightboxModal.innerHTML = 
+                    `<video controls src="img/${mediasList[i].name}/${mediasList[i].video}"  type="video/mp4 class="" id="${mediasList[i].id}"></video>`
+            }
+            nextImg.addEventListener("click", ()=>{
+                lightboxModal.innerHTML = 
+            `<img src="img/${mediasList[i+1].name}/${mediasList[i+1].image}" alt="" class="lightbox-modal__box--photo" id="${mediasList[i+1].id}"></img>`
+            })
+    }
+    class Lightbox{
+    constructor(photographerName, medias, id){
+        this.photographerName = photographerName;
+        this.medias = medias,
+        this.id = id;
+
+        this.generateLightbox = function(){
+
+        }
+    }
+    
+}

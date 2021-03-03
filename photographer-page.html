@@ -83,16 +83,20 @@
             </section>
 
             <div id="displayLightbox">
-                <section class="lightbox-modal">
+                <section class="lightbox-modal" >
 
                     <figure>
                         <div class="lightbox-modal__box">
-                            <i class="fas fa-times closeIcon"></i>
-                            <a href="#"><i class="fas fa-chevron-left"></i></a>
-                            <img src="img/Mimi/Animals_Rainbow.jpg" alt="" class="lightbox-modal__box--photo"></img>
-                            <a href="#"><i class="fas fa-chevron-right"></i></a>
+                            <i class="fas fa-times closeIcon" id="closeIcon"></i>
+                            <a href="#" id="prevIcon"><i class="fas fa-chevron-left"></i></a>
+                            <div id="lightbox-modal">
+                            <!--
+                                <img src="img/Mimi/Animals_Rainbow.jpg" alt="" class="lightbox-modal__box--photo"></img>
+                            -->
+                            </div>
+                                <a href="#" id="nextIcon"><i class="fas fa-chevron-right"></i></a>
                         </div>
-                        <figcaption>Arc-en-ciel</figcaption>
+                        <figcaption id="photoTitle"></figcaption>
                     </figure>
 
                 </section>
@@ -142,10 +146,9 @@
 
         
 
-        <script src=script/contactForm.js></script>
-        <script src=script/lightbox.js></script>
-        <script src=script/photographer.js></script>
-
+        <script type="module" src=script/contactForm.js></script>
+        <script type="module" src=script/photographer.js></script>
+        <script type="module" src=script/lightbox.js></script>
     </body>
 
 </html>

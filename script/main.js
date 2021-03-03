@@ -1,4 +1,5 @@
 const photographersSection = document.getElementById("photographers");
+const articlesList = document.getElementById("photographers").children;
 
 /*Construction d'objet pour les photographes*/
 
@@ -63,13 +64,13 @@ class Photographer {
             newDiv.append(newP3);
     
             let newUl = document.createElement("ul");
-            newUl.className = "tagList";
+            //newUl.className = "tagList";
             newArticle.append(newUl);
     
             for(let tag of this.tags){
                 let newLi = document.createElement("li");
                 newUl.prepend(newLi);
-                let newA = document.createElement("a");
+                let newA = document.createElement("button");
                 newA.className = "tag";
                 newA.setAttribute("tabindex", "0");
                 newLi.prepend(newA);
@@ -125,53 +126,62 @@ fetch("FishEyeDataFR.json")
 })
 .then((photographersList)=>{
     
-
     /* Ecoute des boutons tags*/
     let tagsSelected = document.querySelectorAll(".tag");
-    //console.log(tagsSelected);
+    
+    
     for(let i = 0 ; i < tagsSelected.length ; i++){
         tagsSelected[i].addEventListener("click", saveTag);
     }
+    let previousTag = {}
 
-    /*Tabeau et fonction pour regrouper les tags actifs*/
-    let tagsSelectedList = [];
     function saveTag(tag){
         
-        let tagSelected = (tag.target.text).toLowerCase();
-        //let articlesToShow = document.querySelectorAll("." + tagSelected.substring(1));
-        let articlesList = document.getElementById("photographers").children;
-        //console.log(articlesToShow);
-        console.log(articlesList);
+        let tagSelected = tag.target.textContent.toLowerCase();
         
-        if(tagsSelectedList.includes(tagSelected)){
-            /*** Version Vanilla ***/
-            /*let index = tagsSelectedList.indexOf(tagSelected);
-            tagsSelectedList.splice(index,1);*/
 
-            /*** Version ECMAScript 6 */
-            tagsSelectedList = tagsSelectedList.filter(item => item !== tagSelected);
+        //Raz de l'affichage si bouton cliqué une deuxième fois...*/
+        if(previousTag.time < tag.timeStamp && previousTag.target == tag.target){
+            photographersSection.innerHTML = ""
+            for(let i = 0 ; i < photographersList.length ; i++){
 
-        }else{
-            tagsSelectedList.push(tagSelected);
+                photographersList[i].generatePhotographerCard()
+        
+            }
         }
-        console.log(tagsSelectedList);
 
         /*Faire correspondre les tags sélectionnés et l'affichage*/
 
         for(let i = 0 ; i < articlesList.length ; i++){
 
             if((photographersList[i].tags).includes(tagSelected.substring(1))){
-                //console.log("show");
                 articlesList[i].style.display = "flex";
             }else{
-                //console.log("hide");
                 articlesList[i].style.display = "none";
             }
         }
-
+        previousTag = {
+            time : tag.timeStamp,
+            target : tag.target
+        }
+        
     }
-    console.log(photographersList);
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /*Fonction skip to content*/
     const skipToContent = document.getElementById("skipToContent");
     document.addEventListener("keydown", shortcutToMain);

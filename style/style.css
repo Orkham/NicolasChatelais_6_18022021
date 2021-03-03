@@ -12,6 +12,7 @@ body {
   flex-direction: column;
   position: relative;
   min-width: 320px;
+  margin: 0 auto;
 }
 
 a {
@@ -46,6 +47,7 @@ li {
 header {
   margin: 1rem 1rem;
   display: flex;
+  flex-direction: column;
 }
 header img {
   margin: 1rem 0;
@@ -69,6 +71,7 @@ header .skipToContent {
 }
 header nav {
   width: 85%;
+  margin: auto;
 }
 header ul {
   display: flex;
@@ -78,7 +81,8 @@ header ul {
 header ul li {
   margin: 0.5rem 0.2rem;
 }
-header ul li a {
+header ul li button {
+  background-color: white;
   color: #901c1c;
   border: 0.5px solid #cbcbcb;
   padding: 0.3rem;
@@ -88,7 +92,7 @@ header ul li a {
   font-weight: 400;
   font-size: 0.8rem;
 }
-header ul li a:focus, header ul li a:hover {
+header ul li button:focus, header ul li button:hover, header ul li button active {
   color: white;
   background-color: #901c1c;
 }
@@ -110,6 +114,7 @@ header ul li a:focus, header ul li a:hover {
 }
 
 .lightbox-modal {
+  margin: 0 auto;
   overflow-y: hidden;
   z-index: 2;
   position: fixed;
@@ -120,6 +125,7 @@ header ul li a:focus, header ul li a:hover {
   display: flex;
   background-color: #fff;
   align-items: center;
+  justify-content: center;
 }
 .lightbox-modal figure {
   width: auto;
@@ -168,6 +174,7 @@ header ul li a:focus, header ul li a:hover {
   }
   .lightbox-modal__box--photo {
     object-fit: cover;
+    max-width: 70vw;
     height: 42vh;
     object-position: 50% 25%;
   }
@@ -180,6 +187,31 @@ header ul li a:focus, header ul li a:hover {
     margin-left: 14%;
   }
 }
+/*
+
+#lightbox {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .8);
+    display: none;
+  }
+
+  #lightbox.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #lightbox img {
+    max-width: 90%;
+    max-height: 80%;
+    padding: 4px;
+    background-color: black;
+    border: 2px solid white;
+  }*/
 #displayForm, #displaySuccess {
   display: none;
   margin: 0;
@@ -233,6 +265,7 @@ header ul li a:focus, header ul li a:hover {
   font-family: "DM Sans", sans-serif;
   width: 90%;
   position: relative;
+  margin: auto;
 }
 #form-modal form .missingData {
   display: none;
@@ -370,16 +403,19 @@ header ul li a:focus, header ul li a:hover {
   color: #d3573c;
   font-size: 2.5rem;
   font-weight: 400;
+  margin: 0 auto;
 }
 .photographers article img {
   height: 14rem;
   width: 14rem;
   border-radius: 50%;
   object-fit: cover;
+  margin: auto;
 }
 .photographers .presentation {
   display: flex;
   flex-direction: column;
+  margin: 0.3rem auto;
 }
 .photographers .presentation__localisation {
   font-family: "DM Sans", sans-serif;
@@ -387,6 +423,7 @@ header ul li a:focus, header ul li a:hover {
   font-size: 1rem;
   font-weight: 400;
   padding: 0.2rem;
+  margin: 0 auto;
 }
 .photographers .presentation__quote {
   font-family: "DM Sans", sans-serif;
@@ -394,6 +431,7 @@ header ul li a:focus, header ul li a:hover {
   font-size: 0.8rem;
   font-weight: 400;
   padding: 0.2rem;
+  margin: 0 auto;
 }
 .photographers .presentation__price {
   font-family: "DM Sans", sans-serif;
@@ -401,22 +439,30 @@ header ul li a:focus, header ul li a:hover {
   font-size: 0.8rem;
   font-weight: 400;
   padding: 0.2rem;
+  margin: 0 auto;
 }
-.photographers .tagList {
+.photographers ul {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
-.photographers .tagList li {
-  margin: 0.2rem;
-  font-family: "DM Sans", sans-serif;
-  color: #757575;
-  font-size: 0.8rem;
-  font-weight: 400;
+.photographers ul li {
+  margin: 0.5rem 0.2rem;
+}
+.photographers ul li button {
+  background-color: white;
+  color: #901c1c;
   border: 0.5px solid #cbcbcb;
-  padding: 0.5rem;
+  padding: 0.3rem;
   border-radius: 20px;
   cursor: pointer;
-  margin: 0 0.3rem;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+.photographers ul li button:focus, .photographers ul li button:hover, .photographers ul li button .active, .photographers ul li button:active {
+  color: white;
+  background-color: #901c1c;
 }
 
 @media screen and (min-width: 1200px) {
@@ -435,7 +481,7 @@ header ul li a:focus, header ul li a:hover {
 }
 h1 {
   position: absolute;
-  top: 2.5rem;
+  top: 2rem;
   right: 1rem;
   font-family: "DM Sans", sans-serif;
   color: #901c1c;
@@ -446,6 +492,7 @@ h1 {
 @media screen and (min-width: 800px) {
   h1 {
     font-size: 2rem;
+    top: 1.5rem;
   }
 }
 .select {

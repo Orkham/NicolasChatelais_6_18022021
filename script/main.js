@@ -73,6 +73,7 @@ class Photographer {
                 let newA = document.createElement("button");
                 newA.className = "tag";
                 newA.setAttribute("tabindex", "0");
+                newA.setAttribute("aria-label", "bouton du tag " + tag + " du photographe servant aussi à filtrer les photographes ayant le même tag");
                 newLi.prepend(newA);
                 newA.textContent = "#" + tag;
             }

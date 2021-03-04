@@ -16,6 +16,7 @@ function displayMedias(array){
     totalLikesNumber.innerHTML = likes + ' <i class="fas fa-heart"></i>';
 }
 
+/*classes de création des différents médias*/
 class Media{
     constructor(id, photographerId, image, video, tags, likes, date, price)
     {
@@ -33,9 +34,9 @@ class Media{
         
         this.mediaToDisplay = function(){
             if(this.video){
-                return `<video class="media" tabindex="0"><source src="img/${this.name}/${this.video}"  type="video/mp4" id="${this.id}">${this.title}</video>`
+                return `<video class="media" tabindex="0" aria-label="coucou la belle vidéo"><source src="img/${this.name}/${this.video}"  type="video/mp4" id="${this.id}">${this.title}</video>`
             }else{
-                return`<img tabindex="0" src="img/${this.name}/${this.image}" alt="${this.title}" class="photoCard__img media" loading="lazy" id="id_${this.id}"></img>`
+                return`<img aria-label="coucou la belle photo" tabindex="0" src="img/${this.name}/${this.image}" alt="${this.title}" class="photoCard__img media" loading="lazy" id="id_${this.id}"></img>`
             }
         }
         this.generateDisplay = function(){
@@ -45,7 +46,7 @@ class Media{
                 <figcaption>
                     <p class="photoCard__title">${this.title}</p>
                     <div class="photoCard__numbers">
-                        <p class="photoCard__numbers--price">${this.price} €</p>
+                        <p class="photoCard__numbers--price"  tabindex="0">${this.price} €</p>
                         <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart" tabindex="0"></i></p>
                     </div>
                 </figcaption>
@@ -86,6 +87,7 @@ class Photographer {
                 tagList.append(newLi);
                 let newButton = document.createElement("button");
                 newButton.className = "tag";
+                newButton.setAttribute("aria-label", "filtre des photographies par tag" + tag)
                 newLi.append(newButton);
                 newButton.textContent = "#" + firstLetterUp(tag);
             }

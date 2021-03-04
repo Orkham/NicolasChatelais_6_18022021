@@ -32,14 +32,16 @@ li {
   display: none;
 }
 
+.active {
+  color: white;
+  background-color: #901c1c;
+}
+
 #mainSection {
   max-width: 100%;
 }
 
 @media screen and (min-width: 800px) {
-  /**, *:before, *:after{
-      margin:0 auto;
-  }*/
   html {
     margin: 0 auto;
   }
@@ -92,7 +94,7 @@ header ul li button {
   font-weight: 400;
   font-size: 0.8rem;
 }
-header ul li button:focus, header ul li button:hover, header ul li button active {
+header ul li button:hover, header ul li button:active {
   color: white;
   background-color: #901c1c;
 }
@@ -186,6 +188,9 @@ header ul li button:focus, header ul li button:hover, header ul li button active
   .lightbox-modal figcaption {
     margin-left: 14%;
   }
+  .lightbox-modal img {
+    max-width: 100%;
+  }
 }
 /*
 
@@ -269,6 +274,7 @@ header ul li button:focus, header ul li button:hover, header ul li button active
 }
 #form-modal form .missingData {
   display: none;
+  margin: 0;
 }
 #form-modal form .formTitle {
   position: initial;
@@ -663,7 +669,11 @@ table {
   cursor: pointer;
   margin: 0 0.3rem;
 }
-.tagList li button:focus, .tagList li button:hover {
+.tagList li button:hover {
+  background-color: #901c1c;
+  color: white;
+}
+.tagList .active {
   background-color: #901c1c;
   color: white;
 }

@@ -196,3 +196,29 @@ for(let i = 0 ; i < mediasList.length ; i++){
        
     }
 */
+if(previousTag.time < tag.timeStamp && previousTag.target == tag.target){
+            console.log("reset")
+            console.log(photographersList)
+            photographersSection.innerHTML = ""
+            for(let i = 0 ; i < photographersList.length ; i++){
+                console.log(photographersList[i].generatePhotographerCard)
+                photographersList[i].generatePhotographerCard()
+        
+            }
+        }
+        let previousTag = {
+            time : tag.timeStamp,
+            target : tag.target
+        }
+
+
+/*
+if(tag.target.classList.contains("active")){
+    console.log("remove same tag")
+    tag.target.classList.remove("active")
+}else
+{
+    console.log("add tag on click")
+    tag.target.classList.add("active")
+}
+*/

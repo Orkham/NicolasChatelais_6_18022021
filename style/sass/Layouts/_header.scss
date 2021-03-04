@@ -47,13 +47,15 @@ header{
                 font-weight: 400;
                 font-size: 0.8rem;
                 //margin: 1rem 0.2rem;
-                &:focus, &:hover, active{
+                &:hover, &:active{
                     color:white;
                     background-color: #901c1c;
                 }
+
             }
         }
     }
+    
 }
 
 @media screen and (min-width: 800px){

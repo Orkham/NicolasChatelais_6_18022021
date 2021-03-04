@@ -35,9 +35,9 @@ class Media{
         }*/
         this.mediaToDisplay = function(){
             if(this.video){
-                return `<video class="media"><source src="img/${this.name}/${this.video}"  type="video/mp4" id="${this.id}"></video>`
+                return `<video class="media" tabindex="0"><source src="img/${this.name}/${this.video}"  type="video/mp4" id="${this.id}"></video>`
             }else{
-                return`<img src="img/${this.name}/${this.image}" alt="" class="photoCard__img media" loading="lazy" id="id_${this.id}"></img>`
+                return`<img tabindex="0" src="img/${this.name}/${this.image}" alt="" class="photoCard__img media" loading="lazy" id="id_${this.id}"></img>`
             }
         }
         this.generateDisplay = function(){
@@ -50,7 +50,7 @@ class Media{
                     <p class="photoCard__title">${this.title}</p>
                     <div class="photoCard__numbers">
                         <p class="photoCard__numbers--price">${this.price} €</p>
-                        <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart"></i></p>
+                        <p class="photoCard__numbers--like">${this.likes} <i class="fas fa-heart" tabindex="0"></i></p>
                     </div>
                 </figcaption>
             </figure>`
@@ -119,9 +119,11 @@ class Lightbox{
             lightbox.style.display = "flex";
             console.log(this.medias[index].nodeName)
             if(this.medias[index].nodeName == "IMG"){
-                lightboxModal.innerHTML = `<img src="${this.medias[index].src}" alt="" class="lightbox-modal__box--photo"></img>`
+                lightboxModal.innerHTML = `<img src="${this.medias[index].src}" alt="" class="lightbox-modal__box--photo" style="max-width:100%"></img>`
             }else{
-                lightboxModal.innerHTML = `<video controls><source  src="${this.medias[index].src}" alt="" type="video/mp4" class="lightbox-modal__box--photo"></video>`
+                lightboxModal.innerHTML = `<video controls style="max-width:100%"><source  src="${this.medias[index].currentSrc}" alt="" type="video/mp4" class="lightbox-modal__box--photo" ></video>`
+                console.log(this.medias[index].lastChild)
+                console.log(this.medias[index].currentSrc)
             }
         }
         
@@ -198,16 +200,7 @@ fetch("FishEyeDataFR.json")
 
     displayMedias(mediasList);
     let likesList = [];
-    /*Gestion des likes*/
-    for(let i = 0 ; i < mediasList.length ; i++){
-        likesList.push(
-            new Likes(
-                mediasList[i].likes,
-                
-            )
-        )
-    }
-
+    
     /*Affichage lightbox modal*/
 
     const nextImg = document.getElementById("nextIcon");
@@ -223,7 +216,20 @@ fetch("FishEyeDataFR.json")
         let lightboxContent = new Lightbox(mediasArray2)
         
         mediasArray2.forEach(media => {
-            
+            media.addEventListener("keydown", function(e){
+                if (e.code == '13') {
+                    console.log("coucou")
+                    count = media.index
+                    max = mediasArray2.length
+                    lightboxContent.generateLightbox(count)
+                    nextImg.addEventListener("click", nextImgDisplay)
+                    prevImg.addEventListener("click", prevImgDisplay)
+                }
+            })
+        })
+
+        mediasArray2.forEach(media => {
+
             media.addEventListener("click", function(e){
                 
                 count = media.index
@@ -234,6 +240,7 @@ fetch("FishEyeDataFR.json")
                 
             })
         })
+        
 
         function nextImgDisplay(){
             count++
@@ -298,7 +305,7 @@ fetch("FishEyeDataFR.json")
 
     /*Fonction skip to content*/
 
-    const skipToContent = document.getElementById("skipToContent");
+    /*const skipToContent = document.getElementById("skipToContent");
     document.addEventListener("keydown", shortcutToMain);
 
     function shortcutToMain(e) {
@@ -309,7 +316,7 @@ fetch("FishEyeDataFR.json")
             skipToContent.focus();
             document.removeEventListener("keydown", shortcutToMain);
         }
-    }
+    }*/
     
     /*Filtre des medias par tag*/
     let tagsSelected = document.querySelectorAll(".tag");
@@ -321,32 +328,48 @@ fetch("FishEyeDataFR.json")
     
 
     function displayByTag(tag){
+        photosSection.innerHTML = ""
         
         let tagSelected = tag.target.textContent.toLowerCase();
-        photosSection.innerHTML = ""
+
         /*Faire correspondre les tags sélectionnés et l'affichage*/
         let newMediaList =[]
-        for(let i = 0 ; i < mediasList.length ; i++){
 
-            if((mediasList[i].tags).includes(tagSelected.substring(1))){
-                newMediaList.push(mediasList[i])
-                
+        for(let i = 0 ; i < tagsSelected.length ; i++){
+            if(tag.target.classList.contains("active")&&tagsSelected[i]==tag.target){
+                tag.target.classList.remove("active")
+                displayMedias(mediasList)
+            } 
+            else if(tagsSelected[i]==tag.target){ 
+                tag.target.classList.add("active")
+                for(let j = 0 ; j < mediasList.length ; j++){
+                    if((mediasList[j].tags).includes(tagSelected.substring(1))){
+                        newMediaList.push(mediasList[j])
+                    }
+                }
+            }else if(tagsSelected[i]!=tag.target){
+                tagsSelected[i].classList.remove("active")
             }
         }
+
         displayMedias(newMediaList);
         listenForLightbox()
+        likesListener()
     }
     
 
     /*Gestion des likes*/
-    let likeBtn = document.querySelectorAll(".fa-heart")
-    
-    likeBtn.forEach(btn=>{
-        btn.addEventListener("click", ()=>{
-            btn.previousSibling.data++
-            totalLikesNumber.childNodes[0].data++
+    function likesListener(){
+        let likeBtn = document.querySelectorAll(".fa-heart")
+        
+        likeBtn.forEach(btn=>{
+            btn.addEventListener("click", ()=>{
+                btn.previousSibling.data++
+                totalLikesNumber.childNodes[0].data++
+            })
         })
-    })
+    }
+    likesListener()
 })
 
 

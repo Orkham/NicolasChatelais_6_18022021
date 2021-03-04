@@ -128,59 +128,41 @@ fetch("FishEyeDataFR.json")
     
     /* Ecoute des boutons tags*/
     let tagsSelected = document.querySelectorAll(".tag");
-    
-    
+   
     for(let i = 0 ; i < tagsSelected.length ; i++){
-        tagsSelected[i].addEventListener("click", saveTag);
+        tagsSelected[i].addEventListener("click", displayPhotographersByTag);
     }
-    let previousTag = {}
-
-    function saveTag(tag){
+    
+    function displayPhotographersByTag(tag){
         
         let tagSelected = tag.target.textContent.toLowerCase();
+        tag.target.classList.toggle("active")
         
+        for(let i = 0 ; i < tagsSelected.length ; i++){
+            if(tagsSelected[i]!=tag.target)
+            { 
+                tagsSelected[i].classList.remove("active")
+            }
+        }
+        
+        /*Faire correspondre les tags sélectionnés et l'affichage*/
+        if(tag.target.classList.contains("active")){
+            for(let i = 0 ; i < articlesList.length ; i++){
 
-        //Raz de l'affichage si bouton cliqué une deuxième fois...*/
-        if(previousTag.time < tag.timeStamp && previousTag.target == tag.target){
+                if((photographersList[i].tags).includes(tagSelected.substring(1))){
+                    articlesList[i].style.display = "flex";
+                }else{
+                    articlesList[i].style.display = "none";
+                }
+            }
+        }else{
             photographersSection.innerHTML = ""
             for(let i = 0 ; i < photographersList.length ; i++){
-
                 photographersList[i].generatePhotographerCard()
-        
             }
-        }
-
-        /*Faire correspondre les tags sélectionnés et l'affichage*/
-
-        for(let i = 0 ; i < articlesList.length ; i++){
-
-            if((photographersList[i].tags).includes(tagSelected.substring(1))){
-                articlesList[i].style.display = "flex";
-            }else{
-                articlesList[i].style.display = "none";
-            }
-        }
-        previousTag = {
-            time : tag.timeStamp,
-            target : tag.target
         }
         
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /*Fonction skip to content*/
     const skipToContent = document.getElementById("skipToContent");

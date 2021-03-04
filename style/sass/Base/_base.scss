@@ -33,14 +33,14 @@ li{
 .hide{
     display:none;
 }
-
+.active{
+    color:white;
+    background-color: #901c1c;
+}
 #mainSection{
     max-width: 100%;
 }
 @media screen and (min-width: 800px){
-    /**, *:before, *:after{
-        margin:0 auto;
-    }*/
     html{
         margin: 0 auto;
     }

@@ -154,7 +154,7 @@ header ul li button:hover, header ul li button:active {
   border-radius: 5px;
 }
 .lightbox-modal figcaption {
-  margin-left: 10%;
+  margin-left: 3rem;
   margin-top: 0.5rem;
   font-family: "DM Sans", sans-serif;
   color: #901c1c;
@@ -186,37 +186,12 @@ header ul li button:hover, header ul li button:active {
     right: 2px;
   }
   .lightbox-modal figcaption {
-    margin-left: 14%;
+    margin-left: 3rem;
   }
   .lightbox-modal img {
     max-width: 100%;
   }
 }
-/*
-
-#lightbox {
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, .8);
-    display: none;
-  }
-
-  #lightbox.active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #lightbox img {
-    max-width: 90%;
-    max-height: 80%;
-    padding: 4px;
-    background-color: black;
-    border: 2px solid white;
-  }*/
 #displayForm, #displaySuccess {
   display: none;
   margin: 0;
@@ -727,6 +702,9 @@ table {
   object-position: 100% 20%;
   border-radius: 5px;
 }
+.photoCard img:hover, .photoCard video:hover {
+  cursor: pointer;
+}
 .photoCard figcaption {
   display: flex;
   justify-content: space-between;
@@ -855,7 +833,7 @@ table {
 
   .contactButton {
     position: absolute;
-    top: 12rem;
+    top: 13rem;
     left: 33rem;
     bottom: initial;
   }

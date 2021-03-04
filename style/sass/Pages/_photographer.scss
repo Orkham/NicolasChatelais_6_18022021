@@ -93,6 +93,9 @@
         object-fit: cover;
         object-position: 100% 20%;
         border-radius: 5px;
+        &:hover{
+            cursor: pointer;
+        }
     }
     figcaption{
         display:flex;
@@ -221,7 +224,7 @@
     }
     .contactButton{
         position:absolute;
-        top: 12rem;
+        top: 13rem;
         left:33rem;
         bottom:initial;
     }

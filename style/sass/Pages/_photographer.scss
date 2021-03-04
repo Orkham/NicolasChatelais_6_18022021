@@ -27,7 +27,7 @@
     justify-content: flex-start;
     margin:0.5rem 1rem 0;
     max-width: 70%;
-    li{
+    li button{
         font-family: 'DM Sans', sans-serif;
         color:#901c1c;
         font-size: 0.9rem;
@@ -39,9 +39,8 @@
         margin: 0 0.3rem;
         &:focus, &:hover{
             background-color: #901c1c;
-            a{
-                color:white;
-            }
+            color:white;
+            
         }
     }
 }
@@ -149,7 +148,9 @@
     /********************************/
     /* BOX A RETRAVAILLER EN JS ??? */
     /********************************/
-
+#popu{
+    font-family:  'DM Sans', sans-serif;;
+}
     .sortBy{
         position: relative;
         display:block;
@@ -157,6 +158,7 @@
         font-family: 'DM Sans', sans-serif;
         font-weight: 500;
         .selectBox{
+            font-family: 'DM Sans', sans-serif;
             position:relative;
             display: initial;
             overflow: hidden;
@@ -182,10 +184,6 @@
                 -webkit-appearance: none;
                 -moz-appearance: none;
                 appearance: none;
-                option{
-                    font-family: 'DM Sans', sans-serif;
-                    color:blue;
-                }
             }
         }
         

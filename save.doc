@@ -167,3 +167,32 @@ for(let i = 0 ; i < mediasList.length ; i++){
     }
     
 }
+/*
+    const medias = document.querySelectorAll(".media")
+    const mediasArray2 = Array.from(medias)
+    const lightboxContent = new Lightbox(
+        mediasArray2
+    )
+    
+
+    mediasArray2.forEach(media => {
+        
+        media.addEventListener("click", function(){lightboxContent.generateLightbox(media.index)})
+        
+    })
+    */
+    //console.log(medias);
+    //nextImg.addEventListener("click", lightboxContent.nextImgDisplay)
+
+    /*function nextImgDisplay(index){
+        displayLightbox(index+1)
+    }*/
+
+    /*
+    function displayLightbox(index){
+        //console.log(mediasArray2[index].src)
+        lightbox.style.display = "flex";
+        lightboxModal.innerHTML = `<img src="${mediasArray2[index].src}" alt="" class="lightbox-modal__box--photo"></img>`
+       
+    }
+*/

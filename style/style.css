@@ -479,6 +479,10 @@ header ul li button:focus, header ul li button:hover, header ul li button active
     margin: 2rem 0;
   }
 }
+.fa-heart:hover {
+  cursor: pointer;
+}
+
 h1 {
   position: absolute;
   top: 2rem;
@@ -495,25 +499,128 @@ h1 {
     top: 1.5rem;
   }
 }
-.select {
-  color: white;
-  background-color: #901c1c;
-  width: 8rem;
-  padding: 1rem;
-}
-.select .option {
-  font-family: "DM Sans", sans-serif;
-  padding: 1rem;
-}
-.select .option:first-child, .select .option:nth-child(2) {
-  border-bottom: 1px solid white;
-}
-.select .option:nth-child(n+2) {
-  display: none;
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
 }
 
-.chevronDown {
-  color: white;
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.custom-select-wrapper {
+  position: relative;
+  user-select: none;
+  width: 100%;
+}
+
+.custom-select {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-width: 0 2px 0 2px;
+  border-style: solid;
+  border-color: #394a6d;
+}
+
+.custom-select__trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  font-size: 20px;
+  font-weight: 300;
+  color: #3b3b3b;
+  height: 60px;
+  line-height: 60px;
+  background: #ffffff;
+  cursor: pointer;
+  border-width: 2px 0 2px 0;
+  border-style: solid;
+  border-color: #394a6d;
+}
+
+.custom-options {
+  position: absolute;
+  display: block;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 2px solid #394a6d;
+  border-top: 0;
+  background: #fff;
+  transition: all 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.custom-select.open .custom-options {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+.custom-option {
+  position: relative;
+  display: block;
+  padding: 0 22px 0 22px;
+  font-size: 22px;
+  font-weight: 300;
+  color: #3b3b3b;
+  line-height: 60px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.custom-option:hover {
+  cursor: pointer;
+  background-color: #b2b2b2;
+}
+
+.custom-option.selected {
+  color: #ffffff;
+  background-color: #305c91;
+}
+
+.arrow {
+  position: relative;
+  height: 15px;
+  width: 15px;
+}
+
+.arrow::before, .arrow::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  width: 0.15rem;
+  height: 100%;
+  transition: all 0.5s;
+}
+
+.arrow::before {
+  left: -5px;
+  transform: rotate(45deg);
+  background-color: #394a6d;
+}
+
+.arrow::after {
+  left: 5px;
+  transform: rotate(-45deg);
+  background-color: #394a6d;
+}
+
+.open .arrow::before {
+  left: -5px;
+  transform: rotate(-45deg);
+}
+
+.open .arrow::after {
+  left: 5px;
+  transform: rotate(45deg);
 }
 
 .presentation {
@@ -545,7 +652,7 @@ h1 {
   margin: 0.5rem 1rem 0;
   max-width: 70%;
 }
-.tagList li {
+.tagList li button {
   font-family: "DM Sans", sans-serif;
   color: #901c1c;
   font-size: 0.9rem;
@@ -556,10 +663,8 @@ h1 {
   cursor: pointer;
   margin: 0 0.3rem;
 }
-.tagList li:focus, .tagList li:hover {
+.tagList li button:focus, .tagList li button:hover {
   background-color: #901c1c;
-}
-.tagList li:focus a, .tagList li:hover a {
   color: white;
 }
 
@@ -672,6 +777,10 @@ h1 {
   /********************************/
   /* BOX A RETRAVAILLER EN JS ??? */
   /********************************/
+  #popu {
+    font-family: "DM Sans", sans-serif;
+  }
+
   .sortBy {
     position: relative;
     display: block;
@@ -680,6 +789,7 @@ h1 {
     font-weight: 500;
   }
   .sortBy .selectBox {
+    font-family: "DM Sans", sans-serif;
     position: relative;
     display: initial;
     overflow: hidden;
@@ -705,10 +815,6 @@ h1 {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-  }
-  .sortBy .selectBox #searchBy option {
-    font-family: "DM Sans", sans-serif;
-    color: blue;
   }
 
   .photoCard {

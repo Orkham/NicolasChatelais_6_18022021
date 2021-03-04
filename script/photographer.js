@@ -113,19 +113,24 @@ class Lightbox{
 
         this.generateLightbox = function(index){
             lightbox.style.display = "flex";
-            console.log(this.medias[index])
+            //console.log(this.medias[index])
             if(this.medias[index].nodeName == "IMG"){
                 lightboxModal.innerHTML = `<img src="${this.medias[index].src}" alt="" class="lightbox-modal__box--photo" style="max-width:100%"></img>`
                 photoTitle.innerHTML = `${this.medias[index].alt}`
             }else{
-                lightboxModal.innerHTML = `<video controls style="max-width:100%"><source  src="${this.medias[index].currentSrc}" alt="" type="video/mp4" class="lightbox-modal__box--photo" ></video>`
+                lightboxModal.innerHTML = `<video controls style="max-width:100%" tabindex="0"><source  src="${this.medias[index].currentSrc}" alt="" type="video/mp4" class="lightbox-modal__box--photo" ></video>`
                 photoTitle.innerHTML = `${this.medias[index].textContent}`
-                
+                lightboxModal.firstChild.focus()
             }
         }
-        
+        this.keepFocusIn = function(target){
+            target.addEventListener("blur",()=>{
+                target.focus()
+                console.log("coucou")
+            })
+        }
     }
-    
+
 }
 
 /*Récupération des données du fichiers json data*/
@@ -211,11 +216,11 @@ fetch("FishEyeDataFR.json")
         let medias = document.querySelectorAll(".media")
         let mediasArray2 = Array.from(medias)
         let lightboxContent = new Lightbox(mediasArray2)
-        
+        lightboxContent.keepFocusIn(lightbox)
         mediasArray2.forEach(media => {
             media.addEventListener("keydown", (e)=>{
                 //e.preventDefault()
-                console.log(e)
+                //console.log(e)
                 
                 if (e.keyCode == '13') {
                     console.log("coucou")
@@ -248,14 +253,14 @@ fetch("FishEyeDataFR.json")
         function nextImgDisplay(){
             count++
             count > max-1 ? count = 0 : count = count
-            console.log(count)
+            //console.log(count)
             lightboxContent.generateLightbox(count)
         }
 
         function prevImgDisplay(){
             count--
             count < 0 ? count = max-1 : count = count
-            console.log(count)
+            //console.log(count)
             lightboxContent.generateLightbox(count)
         }
         

@@ -164,6 +164,7 @@ fetch("FishEyeDataFR.json")
         
     }
 
+
     /*Fonction skip to content*/
     const skipToContent = document.getElementById("skipToContent");
     document.addEventListener("keydown", shortcutToMain);

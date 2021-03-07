@@ -61,11 +61,15 @@ function validate(e){
     e.preventDefault();
     //vérification des champs
     checkForm();
+    
     //validation des tests, envoi et reset du formulaire
     if( firstNameValidate == true &&
       lastNameValidate == true &&
       emailValidate == true &&
       messageValidate == true){
+        console.log("Prénom transmis : " + checkForm().firstName)
+        console.log("Nom transmis : " + checkForm().lastName)
+        console.log("Email transmis : " + checkForm().email)
         sendData();
         document.getElementById("contactForm").reset();
     }else{
@@ -77,10 +81,15 @@ function validate(e){
   envoyer.addEventListener("click",validate);
 
 function checkForm(){
+    let results = {}
     checkMessage(messageContent);
     checkEmail(email.value);
     checkLast(lastName.value);
     checkFirst(firstName.value);
+    results.firstName = checkFirst(firstName.value)
+    results.lastName = checkLast(lastName.value)
+    results.email = checkEmail(email.value)
+    return results
 }
 
 //fonction pour vérifier si un string est composé que de lettres, tirets ou apostrophes
@@ -105,6 +114,7 @@ function checkFirst(data){
     if((data.length > 1)&&(isLetterOnly(data))==0){
         document.getElementById("missingFirstName").style.display = "none";
         firstNameValidate = true;
+        return data
     }else{
         document.getElementById("missingFirstName").style.display = "block";
         firstName.focus();
@@ -117,6 +127,7 @@ function checkLast(data){
     if((data.length > 1)&&(isLetterOnly(data))==0){
         document.getElementById("missingLastName").style.display = "none";
         lastNameValidate = true;
+        return(data)
     }else{
         document.getElementById("missingLastName").style.display = "block";
         lastName.focus();
@@ -135,6 +146,7 @@ function checkEmail(mail){
     if(validateEmail(mail)){
         document.getElementById("missingMail").style.display = "none";
         emailValidate = true;
+        return (mail)
     }else{
         document.getElementById("missingMail").style.display = "block";
         email.focus();
@@ -158,12 +170,13 @@ function checkMessage(message){
 
 function sendData() {
     let XHR = new XMLHttpRequest();
-    let form = document.getElementById("contactForm");
-    let FD  = new FormData(form);
-
+    let formData = document.getElementById("contactForm");
+    let FD  = new FormData(formData);
+    
     // succès
     XHR.addEventListener('load', function() {
         showValidateWindow();
+        
     });
    
     // erreur
@@ -177,7 +190,7 @@ function sendData() {
     // Envoi
     XHR.send(FD); 
     closeForm();
-}  
+    }  
 
 const focusableItems = document.querySelectorAll(".focusable");
 //console.log(focusableItems);

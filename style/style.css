@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+* {
+  font-family: "DM Sans", sans-serif;
+}
+
 body {
   max-width: 1200px;
   display: flex;
@@ -219,6 +223,7 @@ header ul li button:hover, header ul li button:active {
   font-family: "DM Sans", sans-serif;
 }
 #form-success button {
+  margin: 0 auto;
   padding: 1rem 3rem;
   width: 80%;
   font-family: "DM Sans", sans-serif;
@@ -462,6 +467,101 @@ header ul li button:hover, header ul li button:active {
 }
 .fa-heart:hover {
   cursor: pointer;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+/* style this to your heart's content */
+input[type=radio] + label {
+  display: none;
+  font-family: "DM Sans", sans-serif;
+  padding: 0.7rem;
+  font-weight: 500;
+  width: 8rem;
+  background: #901c1c;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type=radio]:checked + label {
+  display: inline-block;
+  font-family: "DM Sans", sans-serif;
+  padding: 0.7rem;
+  font-weight: 500;
+  width: 8rem;
+  background: #901c1c;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.selectBox__chevron {
+  color: #fff;
+  position: absolute;
+  left: 120px;
+  top: 5px;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+#down {
+  opacity: 1;
+}
+
+#up {
+  opacity: 0;
+}
+
+.radio_select:hover label,
+.radio_select:focus label,
+.radio_select:focus label:focus label {
+  display: inline-block;
+}
+
+.options:focus label {
+  display: inline-block;
+}
+
+/* none functional styles.  just regular styling */
+.radio_select {
+  background-color: #901c1c;
+  display: inline-block;
+  position: absolute;
+  top: -1rem;
+  left: 5rem;
+  border-radius: 5px;
+}
+
+.radio_select #down, .radio_select #up {
+  left: 125px;
+  top: 12px;
+}
+
+.radio_select:hover #down {
+  opacity: 0;
+}
+
+.radio_select:hover #up {
+  opacity: 1;
+}
+
+.radio_select:hover .options:first-of-type {
+  border-bottom: 1px solid #fff;
+}
+
+.radio_select:hover .options:last-of-type {
+  border-top: 1px solid #fff;
+}
+
+.options {
+  margin: 0 1rem;
+}
+
+.options:hover {
+  padding: 0.1rem;
 }
 
 h1 {
@@ -771,10 +871,13 @@ table {
 
   .sortBy {
     position: relative;
-    display: block;
+    display: flex;
     margin: 1rem 0;
     font-family: "DM Sans", sans-serif;
     font-weight: 500;
+  }
+  .sortBy #filterBy {
+    margin: 0.7rem 0.5rem auto 0;
   }
   .sortBy .selectBox {
     font-family: "DM Sans", sans-serif;

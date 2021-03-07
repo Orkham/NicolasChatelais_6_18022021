@@ -15,16 +15,53 @@
 
     <body>
         
-            <figure class="photoCard">
-                <img src="img/Mimi/Animals_Rainbow.jpg" alt="" class="photoCard__img"></img>
-                <figcaption>
-                    <p class="photoCard__title">Arc-en-ciel</p>
-                    <div class="photoCard__numbers">
-                        <p class="photoCard__numbers--price">70 €</p>
-                        <p class="photoCard__numbers--like" id="likes">12 <i class="fas fa-heart" id="icone"></i></p>
-                    </div>
-                </figcaption>
-            </figure>
+      <div class="sortBy">
+
+        <label for="searchBy" id="filterBy">Trier par </label>
+
+        <ul class="radio_select" role="radiogroup" tabindex="0" id="filterBox">
+            <span class="selectBox__chevron" id="down"><i class="fas fa-chevron-down"></i></span>
+            <span class="selectBox__chevron" id="up"><i class="fas fa-chevron-up"></i></span>
+
+            <li class="options" role="radio" tabindex="0">
+              <input id="popularité" type="radio" name="radio_select"/>
+              <label for="popularité" id="popularityLabel">Popularité</label>
+            </li>
+          
+            <li class="options" role="radio" tabindex="0">
+              <input id="date" type="radio" name="radio_select"/>
+              <label for="date">Date</label>
+            </li>
+          
+            <li class="options" role="radio" tabindex="0">
+              <input id="titre" type="radio" name="radio_select" checked="checked"/>
+              <label for="titre">Titre</label>
+            </li>
+        </ul>
+    </div>
+      
+      
+      
+      
+      
+      <div class="radio_select">
+            <span class="selectBox__chevron" id="down"><i class="fas fa-chevron-down"></i></span>
+            <span class="selectBox__chevron" id="up"><i class="fas fa-chevron-up"></i></span>
+            <div class="options">
+              <input id="popularité" type="radio" name="radio_select" />
+              <label for="popularité">Popularité</label>
+            </div>
+          
+            <div class="options">
+              <input id="date" type="radio" name="radio_select" />
+              <label for="date">Date</label>
+            </div>
+          
+            <div class="options">
+              <input id="titre" type="radio" name="radio_select" checked="checked" />
+              <label for="titre">Titre</label>
+            </div>
+        </div>
         
 
 

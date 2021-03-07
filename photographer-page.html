@@ -47,23 +47,29 @@
 
             <div class="sortBy">
 
-                <label for="searchBy">Trier par </label>
+                <label for="searchBy" id="filterBy">Trier par </label>
 
-                <div class="selectBox">
+                <ul class="radio_select" role="radiogroup" tabindex="0" id="filterBox">
+                    <span class="selectBox__chevron" id="down"><i class="fas fa-chevron-down"></i></span>
+                    <span class="selectBox__chevron" id="up"><i class="fas fa-chevron-up"></i></span>
 
-                    <select name="searchBy" id="searchBy">
+                    <li class="options" role="radio" tabindex="0">
+                      <input id="popularité" type="radio" name="radio_select"/>
+                      <label for="popularité" id="popularityLabel">Popularité</label>
+                    </li>
+                  
+                    <li class="options" role="radio" tabindex="0">
+                      <input id="date" type="radio" name="radio_select"/>
+                      <label for="date">Date</label>
+                    </li>
+                  
+                    <li class="options" role="radio" tabindex="0">
+                      <input id="titre" type="radio" name="radio_select" checked="checked"/>
+                      <label for="titre">Titre</label>
+                    </li>
+                </ul>
+            </div>
 
-                        <option value="Popularité" aria-label="tri par popularité">Popularité</option>
-                        <option value="Date" aria-label="tri par date">Date</option>
-                        <option value="Titre" aria-label="tri par titre">Titre</option>
-
-                    </select>
-
-                    <span class="selectBox__chevron"><i class="fas fa-chevron-down"></i></span>
-
-                </div>
-
-            </div>   
 
             <section class="photos" id="photosSection">
 <!--
@@ -107,7 +113,7 @@
         <div id="displayForm">
             <section id="form-modal" role="dialog">
 
-                <form name="contact" action="photographer-page.html" method="POST" id="contactForm">
+                <form name="contact" action="photographer-page.html" method="GET" id="contactForm">
                     <h1 class="formTitle">Contactez-moi<br>Mimi Keel</h1>
 
                     <label for="firstname">Prénom</label>

@@ -161,10 +161,13 @@
 }
     .sortBy{
         position: relative;
-        display:block;
+        display:flex;
         margin:1rem 0;
         font-family: 'DM Sans', sans-serif;
         font-weight: 500;
+        #filterBy{
+            margin: 0.7rem 0.5rem auto 0;
+        }
         .selectBox{
             font-family: 'DM Sans', sans-serif;
             position:relative;

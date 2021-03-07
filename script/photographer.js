@@ -5,6 +5,7 @@ let totalLikesNumber = document.getElementById("likesNumber");
 const lightbox = document.getElementById("displayLightbox");
 const lightboxModal = document.getElementById("lightbox-modal");
 const photoTitle = document.getElementById("photoTitle")
+//const filterBox = document.getElementById("filterBox")
 
 function displayMedias(array){
     let likes = 0;
@@ -15,7 +16,13 @@ function displayMedias(array){
     }
     totalLikesNumber.innerHTML = likes + ' <i class="fas fa-heart"></i>';
 }
+/*
+class Factory{
+    constructor(array, type){
 
+    }
+}
+*/
 /*classes de création des différents médias*/
 class Media{
     constructor(id, photographerId, image, video, tags, likes, date, price)
@@ -122,7 +129,7 @@ class Lightbox{
             }else{
                 lightboxModal.innerHTML = `<video controls style="max-width:100%" tabindex="0"><source  src="${this.medias[index].currentSrc}" alt="" type="video/mp4" class="lightbox-modal__box--photo" ></video>`
                 photoTitle.innerHTML = `${this.medias[index].textContent}`
-                lightboxModal.firstChild.focus()
+                //lightboxModal.firstChild.focus()
             }
         }
         this.keepFocusIn = function(target){
@@ -203,7 +210,7 @@ fetch("FishEyeDataFR.json")
     /*Création de la liste des photographies à afficher*/
 
     displayMedias(mediasList);
-    let likesList = [];
+    //let likesList = [];
     
     /*Affichage lightbox modal*/
 
@@ -218,11 +225,9 @@ fetch("FishEyeDataFR.json")
         let medias = document.querySelectorAll(".media")
         let mediasArray2 = Array.from(medias)
         let lightboxContent = new Lightbox(mediasArray2)
-        lightboxContent.keepFocusIn(lightbox)
+        
         mediasArray2.forEach(media => {
             media.addEventListener("keydown", (e)=>{
-                //e.preventDefault()
-                //console.log(e)
                 
                 if (e.keyCode == '13') {
                     console.log("coucou")
@@ -237,13 +242,15 @@ fetch("FishEyeDataFR.json")
                     nextImgDisplay()
                 }else if(e.keyCode == '37'){
                     prevImgDisplay()
+                }else if (e.keyCode =='32'){
+                    lightboxModal.firstChild.focus()
                 }
             })
         })
 
         mediasArray2.forEach(media => {
 
-            media.addEventListener("click", function(e){
+            media.addEventListener("click", function(/*e*/){
                 count = media.index
                 max = mediasArray2.length
                 lightboxContent.generateLightbox(count)
@@ -254,15 +261,13 @@ fetch("FishEyeDataFR.json")
         
         function nextImgDisplay(){
             count++
-            count > max-1 ? count = 0 : count = count
-            //console.log(count)
+            count > max-1 ? count = 0 : count
             lightboxContent.generateLightbox(count)
         }
 
         function prevImgDisplay(){
             count--
-            count < 0 ? count = max-1 : count = count
-            //console.log(count)
+            count < 0 ? count = max-1 : count 
             lightboxContent.generateLightbox(count)
         }
         
@@ -271,58 +276,93 @@ fetch("FishEyeDataFR.json")
     listenForLightbox()
 
     /*Fonction tri des photo par popularité, date ou tri*/
-    let searchOptionSelected = document.getElementById("searchBy");
-    
-    function sortByOption(){
-        photosSection.innerHTML = "";
-        switch(searchOptionSelected.value){
-            case "Popularité":
-                console.log("Popularité");
-                mediasList.sort(function(a,b){
-                    return b.likes - a.likes;
-                });
-                displayMedias(mediasList)
-                listenForLightbox()
-                break;
-            case "Date":
-                console.log("Date");
-                mediasList.sort(function(a,b){
-                    if (a.date < b.date)
-                        return -1;
-                    if (a.date > b.date)
-                        return 1;
-                    return 0;
-                });
-                displayMedias(mediasList)
-                listenForLightbox()
-                break;
-            case "Titre":
-                console.log("Titre");
-                mediasList.sort(function(a,b){
-                    if (a.title < b.title)
-                        return -1;
-                    if (a.title > b.title )
-                        return 1;
-                    return 0;
-                });
-                displayMedias(mediasList)
-                listenForLightbox()
-                break;
-        }
-    }
-    
-    searchOptionSelected.addEventListener("change",sortByOption); 
-    
+
+    let options = document.querySelectorAll(".options")
+
+    options.forEach(option=>{
+        option.addEventListener("focus",(e)=>{
+            console.log(e.target.firstElementChild.id)
+            photosSection.innerHTML = "";
+            switch(e.target.firstElementChild.id){
+                case "popularité":
+                    mediasList.sort(function(a,b){
+                        return b.likes - a.likes;
+                    });
+                    displayMedias(mediasList)
+                    listenForLightbox()
+                    break;
+                case "date":
+                    mediasList.sort(function(a,b){
+                        if (a.date < b.date)
+                            return -1;
+                        if (a.date > b.date)
+                            return 1;
+                        return 0;
+                    });
+                    displayMedias(mediasList)
+                    listenForLightbox()
+                    break;
+                case "titre":
+                    mediasList.sort(function(a,b){
+                        if (a.title < b.title)
+                            return -1;
+                        if (a.title > b.title )
+                            return 1;
+                        return 0;
+                    });
+                    displayMedias(mediasList)
+                    listenForLightbox()
+                    break;
+            }
+        })})
+    options.forEach(option=>{
+        option.addEventListener("click",(e)=>{
+
+            photosSection.innerHTML = "";
+            
+            switch(e.target.id){
+                case "popularité":
+                    mediasList.sort(function(a,b){
+                        return b.likes - a.likes;
+                    });
+                    displayMedias(mediasList)
+                    listenForLightbox()
+                    break;
+                case "date":
+                    mediasList.sort(function(a,b){
+                        if (a.date < b.date)
+                            return -1;
+                        if (a.date > b.date)
+                            return 1;
+                        return 0;
+                    });
+                    displayMedias(mediasList)
+                    listenForLightbox()
+                    break;
+                case "titre":
+                    mediasList.sort(function(a,b){
+                        if (a.title < b.title)
+                            return -1;
+                        if (a.title > b.title )
+                            return 1;
+                        return 0;
+                    });
+                    displayMedias(mediasList)
+                    listenForLightbox()
+                    break;
+            }
+        })
+    })
+
     /*Filtre des medias par tag*/
     let tagsSelected = document.querySelectorAll(".tag");
-    
     
     for(let i = 0 ; i < tagsSelected.length ; i++){
         tagsSelected[i].addEventListener("click", displayByTag);
     }
     
-
     function displayByTag(tag){
+
         photosSection.innerHTML = ""
         
         let tagSelected = tag.target.textContent.toLowerCase();
@@ -331,10 +371,12 @@ fetch("FishEyeDataFR.json")
         let newMediaList =[]
 
         for(let i = 0 ; i < tagsSelected.length ; i++){
+            /*Conditions pour désélectionner le tag déjà sélectionné*/
             if(tag.target.classList.contains("active")&&tagsSelected[i]==tag.target){
                 tag.target.classList.remove("active")
                 displayMedias(mediasList)
             } 
+            /*Condition de sélection du tag*/
             else if(tagsSelected[i]==tag.target){ 
                 tag.target.classList.add("active")
                 for(let j = 0 ; j < mediasList.length ; j++){
@@ -342,7 +384,9 @@ fetch("FishEyeDataFR.json")
                         newMediaList.push(mediasList[j])
                     }
                 }
-            }else if(tagsSelected[i]!=tag.target){
+            }
+            /*Gestion des tags précédemment sélectionnés*/
+            else if(tagsSelected[i]!=tag.target){
                 tagsSelected[i].classList.remove("active")
             }
         }
@@ -350,9 +394,17 @@ fetch("FishEyeDataFR.json")
         displayMedias(newMediaList);
         listenForLightbox()
         likesListener()
+        
+        if(totalLikesNumber.textContent == 0){
+            let likes = 0;
+            for(let i = 0 ; i < mediasList.length ; i++){
+                likes += mediasList[i].likes
+            }   
+            totalLikesNumber.innerHTML = likes + ' <i class="fas fa-heart"></i>';
+        }
+        
     }
     
-
     /*Gestion des likes*/
     function likesListener(){
         let likeBtn = document.querySelectorAll(".fa-heart")

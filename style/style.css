@@ -122,7 +122,7 @@ header ul li button:hover, header ul li button:active {
 .lightbox-modal {
   margin: 0 auto;
   overflow-y: hidden;
-  z-index: 2;
+  z-index: 5;
   position: fixed;
   top: 0;
   height: 100%;
@@ -469,42 +469,14 @@ header ul li button:hover, header ul li button:active {
   cursor: pointer;
 }
 
-input[type=radio] {
-  display: none;
-}
-
-/* style this to your heart's content */
-input[type=radio] + label {
-  display: none;
-  font-family: "DM Sans", sans-serif;
-  padding: 0.7rem;
-  font-weight: 500;
-  width: 8rem;
-  background: #901c1c;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-input[type=radio]:checked + label {
-  display: inline-block;
-  font-family: "DM Sans", sans-serif;
-  padding: 0.7rem;
-  font-weight: 500;
-  width: 8rem;
-  background: #901c1c;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 .selectBox__chevron {
   color: #fff;
   position: absolute;
-  left: 120px;
-  top: 5px;
+  left: 215px;
+  top: 10px;
   cursor: pointer;
   pointer-events: none;
+  z-index: 3;
 }
 
 #down {
@@ -515,17 +487,14 @@ input[type=radio]:checked + label {
   opacity: 0;
 }
 
-.radio_select:hover label,
-.radio_select:focus label,
-.radio_select:focus label:focus label {
-  display: inline-block;
+#filterBox:hover ~ #down {
+  opacity: 0;
 }
 
-.options:focus label {
-  display: inline-block;
+#filterBox:hover ~ #up {
+  opacity: 1;
 }
 
-/* none functional styles.  just regular styling */
 .radio_select {
   background-color: #901c1c;
   display: inline-block;
@@ -533,35 +502,69 @@ input[type=radio]:checked + label {
   top: -1rem;
   left: 5rem;
   border-radius: 5px;
+  cursor: pointer;
 }
 
-.radio_select #down, .radio_select #up {
-  left: 125px;
-  top: 12px;
-}
-
-.radio_select:hover #down {
-  opacity: 0;
-}
-
-.radio_select:hover #up {
-  opacity: 1;
-}
-
-.radio_select:hover .options:first-of-type {
+.radio_select:hover .optionsContainer:first-of-type,
+.radio_select:focus .optionsContainer:first-of-type,
+#filterBox:focus-within .optionsContainer:first-of-type {
   border-bottom: 1px solid #fff;
 }
 
-.radio_select:hover .options:last-of-type {
+.radio_select:hover .optionsContainer:last-of-type,
+.radio_select:focus .optionsContainer:last-of-type,
+#filterBox:focus-within .optionsContainer:last-of-type {
   border-top: 1px solid #fff;
 }
 
-.options {
+.optionsContainer {
   margin: 0 1rem;
 }
 
-.options:hover {
+.optionsContainer:hover {
   padding: 0.1rem;
+}
+
+.optionsContainer button {
+  font-family: "DM Sans", sans-serif;
+  padding: 0.7rem;
+  font-weight: 500;
+  width: 8rem;
+  background: #901c1c;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+#filterBox li button.active {
+  display: block;
+}
+
+#filterBox li button {
+  display: none;
+}
+
+#filterBox:hover li:nth-child(1) button,
+#filterBox:focus li:nth-child(1) button,
+#filterBox:hover li:nth-child(2) button,
+#filterBox:hover li:nth-child(3) button,
+#filterBox:focus li:nth-child(2) button,
+#filterBox:focus li:nth-child(3) button {
+  display: block;
+}
+
+#filterBox:focus-within li:nth-child(1) button,
+#filterBox:focus-within li:nth-child(2) button,
+#filterBox:focus-within li:nth-child(3) button {
+  display: block;
+}
+
+#filterBox:focus li:nth-child(2), #filterBox:focus li:nth-child(3) {
+  display: block;
+}
+
+.options {
+  text-align: left;
 }
 
 h1 {
@@ -865,10 +868,6 @@ table {
   /********************************/
   /* BOX A RETRAVAILLER EN JS ??? */
   /********************************/
-  #popu {
-    font-family: "DM Sans", sans-serif;
-  }
-
   .sortBy {
     position: relative;
     display: flex;
@@ -884,14 +883,6 @@ table {
     position: relative;
     display: initial;
     overflow: hidden;
-  }
-  .sortBy .selectBox__chevron {
-    color: #fff;
-    position: absolute;
-    left: 120px;
-    top: 2px;
-    cursor: pointer;
-    pointer-events: none;
   }
   .sortBy .selectBox #searchBy {
     margin-left: 1rem;

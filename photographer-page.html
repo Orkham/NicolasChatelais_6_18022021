@@ -49,25 +49,24 @@
 
                 <label for="searchBy" id="filterBy">Trier par </label>
 
-                <ul class="radio_select" role="radiogroup" tabindex="0" id="filterBox">
-                    <span class="selectBox__chevron" id="down"><i class="fas fa-chevron-down"></i></span>
-                    <span class="selectBox__chevron" id="up"><i class="fas fa-chevron-up"></i></span>
+                
 
-                    <li class="options" role="radio" tabindex="0">
-                      <input id="popularité" type="radio" name="radio_select"/>
-                      <label for="popularité" id="popularityLabel">Popularité</label>
+                <ul class="radio_select" role="radiogroup" tabindex="0" id="filterBox">
+                    
+                    <li class="optionsContainer"  role="radio" >
+                      <button class="options active" type="button" name="popularité" tabindex="0">Popularité</button>
                     </li>
                   
-                    <li class="options" role="radio" tabindex="0">
-                      <input id="date" type="radio" name="radio_select"/>
-                      <label for="date">Date</label>
+                    <li class="optionsContainer" role="radio" >
+                      <button class="options" tabindex="0" type="button" name="date">Date</button>
                     </li>
                   
-                    <li class="options" role="radio" tabindex="0">
-                      <input id="titre" type="radio" name="radio_select" checked="checked"/>
-                      <label for="titre">Titre</label>
+                    <li class="optionsContainer" role="radio" >
+                      <button class="options" tabindex="0" type="button" name="titre">Titre</button>
                     </li>
                 </ul>
+                <span class="selectBox__chevron" id="down"><i class="fas fa-chevron-down"></i></span>
+                <span class="selectBox__chevron" id="up"><i class="fas fa-chevron-up"></i></span>
             </div>
 
 

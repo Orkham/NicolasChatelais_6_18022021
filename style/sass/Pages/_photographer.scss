@@ -156,9 +156,7 @@
     /********************************/
     /* BOX A RETRAVAILLER EN JS ??? */
     /********************************/
-#popu{
-    font-family:  'DM Sans', sans-serif;;
-}
+
     .sortBy{
         position: relative;
         display:flex;
@@ -173,15 +171,7 @@
             position:relative;
             display: initial;
             overflow: hidden;
-            &__chevron{
-                color:#fff;
-                position :absolute;
-                left:120px;
-                top:2px;
-                cursor:pointer;
-                pointer-events: none;
-            }
-
+            
             #searchBy{
                 margin-left: 1rem;
                 font-family: 'DM Sans', sans-serif;

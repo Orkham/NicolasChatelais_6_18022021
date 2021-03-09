@@ -319,4 +319,38 @@ if(tag.target.classList.contains("active")){
         */
 
 
+/*
+function displayPhotographersByTag(tag, tags, list){
+        
+    let tagSelected = tag.target.textContent.toLowerCase();
+    tag.target.classList.toggle("active")
+    
+    for(let i = 0 ; i < tags.length ; i++){
+        if(tags[i]!=tag.target)
+        { 
+            tags[i].classList.remove("active")
+        }
+    }
+    
+    /*Faire correspondre les tags sélectionnés et l'affichage*/
+/*
+    if(tag.target.classList.contains("active")){
+        for(let i = 0 ; i < articlesList.length ; i++){
+
+            if((list[i].tags).includes(tagSelected.substring(1))){
+                articlesList[i].style.display = "flex";
+            }else{
+                articlesList[i].style.display = "none";
+            }
+        }
+    }else{
+        photographersSection.innerHTML = ""
+        for(let i = 0 ; i < list.length ; i++){
+            list[i].generatePhotographerCard(photographersSection)
+        }
+    }
+}
+*/
+
+
         

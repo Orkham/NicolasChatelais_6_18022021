@@ -78,6 +78,7 @@ let totalLikesNumber = document.getElementById("likesNumber");
 export function displayMedias(array){
     let likes = 0;
     for (let i = 0 ; i < array.length ; i++){
+        /*Affichage du média*/
         array[i].generateDisplay();
         /*Nombre total de like*/
         likes += array[i].likes;

@@ -1,3 +1,5 @@
+/*** DECLARATIONS ***/
+
 const contactBtn = document.getElementById("contactBtn");
 const closeFormBtn = document.getElementById("closeFormBtn");
 const form = document.getElementById("displayForm");
@@ -193,22 +195,13 @@ function sendData() {
     }  
 
 const focusableItems = document.querySelectorAll(".focusable");
-//console.log(focusableItems);
+
 function giveFocus(){
     focusableItems[0].focus();
-    console.log("focus");
 }
 
 focusableItems[5].addEventListener("blur", giveFocus);
-
-function myFunction (event) {
-    let x = event.keyCode;
-    if (x == 27) {// 27 touche ESC est
-    alert ( "Vous avez appuyé sur la touche Echap !");
-    }
-} 
-closeFormBtn.addEventListener("click", myFunction);
-
+                
 form.addEventListener('keyup', function (event) {
     if (event.key === 'Escape') {
         closeForm();

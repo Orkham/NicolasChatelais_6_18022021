@@ -1,5 +1,5 @@
 
-import {Lightbox} from './lightbox.js'
+import {Lightbox} from './LightboxClass.js'
 import {Factory, displayMedias, likesListener} from './MediaClass.js'
 import {Photographer} from './PhotographerClass.js'
 import {unsetClass} from './utils.js'
@@ -70,8 +70,6 @@ fetch("FishEyeDataFR.json")
 
     let options = document.querySelectorAll(".options")
     
-    
-
     options.forEach(option=>{
         option.addEventListener("click",(e)=>{
 
@@ -158,7 +156,6 @@ fetch("FishEyeDataFR.json")
             }
         }
 
-        
         lightboxContent.listenForLightbox()
         likesListener()
         

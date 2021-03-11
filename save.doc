@@ -352,5 +352,13 @@ function displayPhotographersByTag(tag, tags, list){
 }
 */
 
-
+/*
+function myFunction (event) {
+    let x = event.keyCode;
+    if (x == 27) {// 27 touche ESC est
+    alert ( "Vous avez appuyé sur la touche Echap !");
+    }
+} 
+closeFormBtn.addEventListener("click", myFunction);
+*/
         

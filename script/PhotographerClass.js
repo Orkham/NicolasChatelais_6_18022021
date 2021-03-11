@@ -9,7 +9,9 @@ import {firstLetterUp}  from './utils.js'
 const dailyPrice = document.getElementById("price");
 
 
-
+/**
+ * @param {node} section - Sélecteur du node principal de la page pour y insérer le contenu
+ */
 export class Photographer {
     constructor(object) 
     {
@@ -122,12 +124,20 @@ export class Photographer {
 
 /*** FONCTION CALLBACK D'AFFICHAGE DES PHOTOGRAPHES PAR TAG ***/
 
+/**
+ * 
+ * @param {click} tag - tag sur lequel on a cliqué
+ * @param {nodeList} tags - liste des tags sur la page
+ * @param {Array of Objects} list - tableau stockant les données des photographes
+ */
+
 export function displayPhotographersByTag(tag, tags, list){
 
     const articlesList = document.getElementById("photographers").children;
     const photographersSection = document.getElementById("photographers");
     let tagSelected = tag.target.textContent.toLowerCase();
-    
+
+    //Activer le tag cliqué en ajoutant la class "active"
     tag.target.classList.toggle("active")
     
     for(let i = 0 ; i < tags.length ; i++){

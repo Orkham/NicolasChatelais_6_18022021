@@ -22,7 +22,7 @@ let emailValidate;
 let messageValidate;
 
 function formDisplay(){
-    form.style.display = "block";
+    form.style.display = "flex";
     form.setAttribute("aria-hidden", false);
     mainPage.setAttribute("aria-hidden", true);
     header.setAttribute("aria-hidden", true);

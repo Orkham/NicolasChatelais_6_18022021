@@ -251,7 +251,7 @@ header ul li button:hover, header ul li button:active {
   font-family: "DM Sans", sans-serif;
   width: 90%;
   position: relative;
-  margin: auto;
+  margin: 1rem auto;
 }
 #form-modal form .missingData {
   display: none;
@@ -260,7 +260,7 @@ header ul li button:hover, header ul li button:active {
 #form-modal form .formTitle {
   position: initial;
   color: #000;
-  font-size: 2rem;
+  font-size: 2.25rem;
   margin: 1rem 0 2rem;
 }
 #form-modal form label {
@@ -268,7 +268,7 @@ header ul li button:hover, header ul li button:active {
   margin: 0;
   margin-bottom: 0.3rem;
   margin-top: 0.6rem;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 #form-modal form input, #form-modal form textarea {
   margin: 0;
@@ -300,6 +300,11 @@ header ul li button:hover, header ul li button:active {
   padding: 0.5rem 3rem;
   border-radius: 5px;
   cursor: pointer;
+}
+#form-modal form button:hover {
+  background-color: #DB8876;
+  color: #000;
+  border: 1px solid #901c1c;
 }
 
 @media screen and (min-width: 800px) {
@@ -336,10 +341,11 @@ header ul li button:hover, header ul li button:active {
     z-index: 1;
     position: fixed;
     top: 0;
-    width: 100vw;
+    right: 0;
+    width: 100%;
     max-width: 100%;
     height: 100vh;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: white;
     /*
     animation-name:modalopen;
     animation-duration:1s;
@@ -352,12 +358,28 @@ header ul li button:hover, header ul li button:active {
     height: auto;
     padding-bottom: 1rem;
     border-radius: 5px;
+    max-width: 670px;
+    position: initial;
+    margin: 1rem auto;
+  }
+  #displayForm #form-modal .formTitle {
+    font-size: 4rem;
+  }
+  #displayForm #form-modal label {
+    font-size: 2.25rem;
   }
   #displayForm #form-modal button {
     margin-left: 3px;
     padding: 1rem 3rem;
   }
 }
+/*
+@media screen and (min-width: 1200px){
+    #form-modal{
+        background-color: blue;
+
+    }
+}*/
 @keyframes modalopen {
   from {
     opacity: 0;
@@ -659,8 +681,9 @@ h1 {
   border-radius: 5px;
 }
 .contactButton:hover, .contactButton:focus {
-  background-color: #d3573c;
-  color: #901c1c;
+  background-color: #DB8876;
+  color: #000;
+  border: 1px solid #901c1c;
 }
 
 .photos {

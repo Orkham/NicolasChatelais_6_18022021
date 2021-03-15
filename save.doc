@@ -361,4 +361,77 @@ function myFunction (event) {
 } 
 closeFormBtn.addEventListener("click", myFunction);
 */
+
+
+this.listenForLightbox = function(){
+            //navigation avec l'index
+            let count = 0;
+            //retour au début quand on dépasse le max
+            let max = 0;
+            
+            let medias = document.querySelectorAll(".media")
+            let arrayFromMedias = Array.from(medias)
+            let lightboxContent = new Lightbox(arrayFromMedias)
+            
+
+            
+            /*Navigation au clavier des médias*/
+            function keyboardNavigation(){
+                
+                
+                    lightboxModal.addEventListener('keydown',(e)=>{
+                        if(e.code == '27'/*Echap*/){
+            
+                            document.getElementById("displayLightbox").style.display = "none";
+                            body.style.overflowY = "visible"
+                        }else if(e.code == '39'/*Flèche droite*/){
+                            console.log('coucou')
+                            nextImgDisplay()
+                        }else if(e.code == '37'/*Flèche gauche*/){
+                            prevImgDisplay()
+                        }else if (e.code =='32'/*Barre d'espace*/){
+                            lightboxModal.firstChild.focus()
+                        }
+                    })    
+                    
+                
+            }
+            keyboardNavigation()
+
+            function mouseNavigation(){
+                arrayFromMedias.forEach(media => {
+
+                    media.addEventListener("click", ()=>{
+                        count = media.index
+                        max = arrayFromMedias.length
+                        lightboxContent.generateLightbox(count)
+                        nextImg.addEventListener("click", nextImgDisplay)
+                        prevImg.addEventListener("click", prevImgDisplay)
+                        
+                    })
+                })
+            }
+            mouseNavigation()
+            
+
+            
+            
+            //Callback média suivant
+            function nextImgDisplay(){
+                count++
+                count > max-1 ? count = 0 : count
+                lightboxContent.generateLightbox(count)
+                
+            }
+
+            //Callback média précédent
+            function prevImgDisplay(){
+                count--
+                count < 0 ? count = max-1 : count 
+                lightboxContent.generateLightbox(count)
+                
+            }
+            
+        }
+    }
         

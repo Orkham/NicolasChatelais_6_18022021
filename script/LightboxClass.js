@@ -1,3 +1,5 @@
+
+
 /*** DECLARATIONS ***/
 
 const lightbox = document.getElementById("displayLightbox");
@@ -5,7 +7,8 @@ const photoTitle = document.getElementById("photoTitle")
 const lightboxModal = document.getElementById("lightbox-modal");
 const nextImg = document.getElementById("nextIcon");
 const prevImg = document.getElementById("prevIcon");
-
+const body = document.body;
+   
 
 
 /*** OBJET QUI GERE L'AFFICHAGE DES MEDIAS EN PLEIN ECRAN (carrousel) ***/
@@ -20,7 +23,8 @@ export class Lightbox{
         this.createIndex = function(){
             this.medias.forEach(media => {
                 Object.defineProperty(media, 'index',{
-                    value : medias.indexOf(media)})
+                    value : medias.indexOf(media)
+                })
             })
         },
         this.createIndex(),
@@ -29,7 +33,7 @@ export class Lightbox{
 
         this.generateLightbox = function(index){
             lightbox.style.display = "flex";
-            
+            body.style.overflowY = "hidden";
             if(this.medias[index].nodeName == "IMG"){
                 lightboxModal.innerHTML = `<img src="${this.medias[index].src}" alt="${this.medias[index].alt}" class="lightbox-modal__box--photo" style="max-width:100%"></img>`
                 photoTitle.innerHTML = `${this.medias[index].alt}`
@@ -37,83 +41,213 @@ export class Lightbox{
                 lightboxModal.innerHTML = `<video controls style="max-width:100%" tabindex="0"><source  src="${this.medias[index].currentSrc}" alt="${this.medias[index].textContent}" type="video/mp4" class="lightbox-modal__box--photo" ></video>`
                 photoTitle.innerHTML = `${this.medias[index].textContent}`
             }
+            
         },
         
 
 /*Fonction d'écoute pour affichage de la lightbox appelé après chaque tri*/
 
-        this.listenForLightbox = function(){
-            //navigation avec l'index
-            let count = 0;
-            //retour au début quand on dépasse le max
-            let max = 0;
+        this.navigationInLightbox = function(){
             
-            let medias = document.querySelectorAll(".media")
-            let arrayFromMedias = Array.from(medias)
-            let lightboxContent = new Lightbox(arrayFromMedias)
+            let mediaIndex = 0;
             
+            let medias = Array.from(document.querySelectorAll(".media"))
+            
+            let lightboxContent = new Lightbox(medias)
+            
+            let maxMediaIndex = medias.length
 
-            
-            /*Navigation au clavier des médias*/
-            function keyboardNavigation(){
-                arrayFromMedias.forEach(media => {
-                    media.addEventListener("keydown", (e)=>{
-                        
-                        if (e.keyCode == '13') {
-                            count = media.index
-                            max = arrayFromMedias.length
-                            lightboxContent.generateLightbox(count)
-                            nextImg.addEventListener("click", nextImgDisplay)
-                            prevImg.addEventListener("click", prevImgDisplay)
-                        }else if(e.keyCode == '27'/*Echap*/){
+            medias.forEach(media => {
+                    
+                media.addEventListener("click", ()=>{
+                    
+                    mediaIndex = media.index
+                    lightboxContent.generateLightbox(mediaIndex)
+                    
+                    //console.log(count)
+                    
+                })
+
+                media.addEventListener("keydown", (e)=>{
+                
+                    //count = media.index
+                    
+                    switch(e.key){
+                        case 'Enter':
+                            console.log('entrée')
+                            mediaIndex = media.index     
+                            this.generateLightbox(mediaIndex)
+                            break;  
+                        case 'Escape':
+                            console.log('échap')
                             document.getElementById("displayLightbox").style.display = "none";
-                        }else if(e.keyCode == '39'/*Flèche droite*/){
-                            nextImgDisplay()
-                        }else if(e.keyCode == '37'/*Flèche gauche*/){
-                            prevImgDisplay()
-                        }else if (e.keyCode =='32'/*Barre d'espace*/){
-                            lightboxModal.firstChild.focus()
-                        }
-                    })
+                            body.style.overflowY = "visible"
+                            //media.removeEventListener("keydown",(e))
+                            break;
+                            
+                        case 'ArrowLeft':
+                            console.log('arrière')
+                            mediaIndex--
+                            mediaIndex < 0 ? mediaIndex = maxMediaIndex-1 : mediaIndex
+                            this.generateLightbox(mediaIndex)
+                            console.log(mediaIndex)
+                            return mediaIndex
+                            
+                        case 'ArrowRight':
+                            console.log('avant')
+                            mediaIndex++
+                            mediaIndex > maxMediaIndex-1 ? mediaIndex = 0 : mediaIndex
+                            this.generateLightbox(mediaIndex)
+                            console.log(mediaIndex)
+                            return mediaIndex
+                        default:
+                            console.log(e)
+                    }
                 })
-            }
-            keyboardNavigation()
+                
+            })
+            
+            nextImg.addEventListener("click", ()=>{
+                mediaIndex++
+                mediaIndex > maxMediaIndex-1 ? mediaIndex = 0 : mediaIndex
+                this.generateLightbox(mediaIndex)
+                console.log(mediaIndex)
+                //console.log(this)
+                console.log(this.isAlreadyListen)
+                
+                
+                if (!this.isAlreadyListen){
+                    lightbox.addEventListener('keydown', (e)=>{
+                    switch(e.key){
+                        case 'Escape':
+                            console.log('échap')
+                            document.getElementById("displayLightbox").style.display = "none";
+                            body.style.overflowY = "visible"
+                            //media.removeEventListener("keydown",(e))
+                            break;
+                            
+                        case 'ArrowLeft':
+                            console.log('arrière')
+                            mediaIndex--
+                            mediaIndex < 0 ? mediaIndex = maxMediaIndex-1 : mediaIndex
+                            this.generateLightbox(mediaIndex)
+                            console.log(mediaIndex)
+                            return mediaIndex
+                            
+                        case 'ArrowRight':
+                            console.log('avant')
+                            mediaIndex++
+                            mediaIndex > maxMediaIndex-1 ? mediaIndex = 0 : mediaIndex
+                            this.generateLightbox(mediaIndex)
+                            console.log(mediaIndex)
+                            return mediaIndex
 
-            function mouseNavigation(){
-                arrayFromMedias.forEach(media => {
-
-                    media.addEventListener("click", ()=>{
-                        count = media.index
-                        max = arrayFromMedias.length
-                        lightboxContent.generateLightbox(count)
-                        nextImg.addEventListener("click", nextImgDisplay)
-                        prevImg.addEventListener("click", prevImgDisplay)
-                        //keyboardNavigation()
-                    })
+                        
+                        default:
+                            console.log(e)
+                    }
                 })
-            }
-            mouseNavigation()
-            
-
-            
-            
-            //Callback média suivant
-            function nextImgDisplay(){
-                count++
-                count > max-1 ? count = 0 : count
-                lightboxContent.generateLightbox(count)
+                this.isAlreadyListen = true;
+                }
                 
-            }
+               /*
+                lightbox.addEventListener('keydown', (e)=>{
+                    switch(e.key){
+                        case 'Escape':
+                            console.log('échap')
+                            document.getElementById("displayLightbox").style.display = "none";
+                            body.style.overflowY = "visible"
+                            //media.removeEventListener("keydown",(e))
+                            break;
+                            
+                        case 'ArrowLeft':
+                            console.log('arrière')
+                            mediaIndex--
+                            mediaIndex < 0 ? mediaIndex = maxMediaIndex-1 : mediaIndex
+                            this.generateLightbox(mediaIndex)
+                            console.log(mediaIndex)
+                            return mediaIndex
+                            
+                        case 'ArrowRight':
+                            console.log('avant')
+                            mediaIndex++
+                            mediaIndex > maxMediaIndex-1 ? mediaIndex = 0 : mediaIndex
+                            this.generateLightbox(mediaIndex)
+                            console.log(mediaIndex)
+                            return mediaIndex
 
-            //Callback média précédent
-            function prevImgDisplay(){
-                count--
-                count < 0 ? count = max-1 : count 
-                lightboxContent.generateLightbox(count)
-                
-            }
-            
+                        
+                        default:
+                            console.log(e)
+                    }
+                })*/
+            })
+            prevImg.addEventListener("click", ()=>{
+                mediaIndex--
+                mediaIndex < 0 ? mediaIndex = maxMediaIndex-1 : mediaIndex
+                this.generateLightbox(mediaIndex)
+                console.log(mediaIndex)
+                lightbox.addEventListener('keydown', (e)=>{
+                    switch(e.key){
+                        case 'Escape':
+                            console.log('échap')
+                            document.getElementById("displayLightbox").style.display = "none";
+                            body.style.overflowY = "visible"
+                            //media.removeEventListener("keydown",(e))
+                            break;
+                            
+                        case 'ArrowLeft':
+                            console.log('arrière')
+                            mediaIndex--
+                            mediaIndex < 0 ? mediaIndex = maxMediaIndex-1 : mediaIndex
+                            this.generateLightbox(mediaIndex)
+                            console.log(mediaIndex)
+                            return mediaIndex
+                            
+                        case 'ArrowRight':
+                            console.log('avant')
+                            mediaIndex++
+                            mediaIndex > maxMediaIndex-1 ? mediaIndex = 0 : mediaIndex
+                            this.generateLightbox(mediaIndex)
+                            console.log(mediaIndex)
+                            return mediaIndex
+
+                        
+                        default:
+                            console.log(e)
+                    }
+                })
+            })
+            /*
+            medias.forEach(media => {
+                     /*    
+                        case 'Escape':
+                            console.log('échap')
+                            document.getElementById("displayLightbox").style.display = "none";
+                            body.style.overflowY = "visible"
+                            media.removeEventListener("keydown",(e))
+                            break;
+                            
+                        case 'ArrowLeft':
+                            console.log('arrière')
+                            mediaIndex--
+                            mediaIndex < 0 ? mediaIndex = maxMediaIndex-1 : mediaIndex
+                            this.generateLightbox(mediaIndex)
+                            console.log(mediaIndex)
+                            return mediaIndex
+                            
+                        case 'ArrowRight':
+                            console.log('avant')
+                            mediaIndex++
+                            mediaIndex > maxMediaIndex-1 ? mediaIndex = 0 : mediaIndex
+                            this.generateLightbox(mediaIndex)
+                            console.log(mediaIndex)
+                            return mediaIndex
+
+            })*/
+            //console.log(medias)
         }
+        
     }
 }
 
@@ -121,7 +255,13 @@ export class Lightbox{
 //Fermeture de la lightbox par icône croix
 
 const closeIcon = document.getElementById("closeIcon");
-
+/*
+lightbox.addEventListener('click', ()=>{
+    console.log(document.getElementById('lightbox-modal').firstChild)
+})
+*/
 closeIcon.addEventListener("click", ()=>{
     document.getElementById("displayLightbox").style.display = "none";
+    body.style.overflowY = "visible"
 });
+

@@ -72,8 +72,9 @@
     padding: 0.5rem;
     border-radius: 5px;
     &:hover, &:focus{
-        background-color: #d3573c;
-        color:#901c1c;
+        background-color:#DB8876 ;
+        color:#000;
+        border: 1px solid #901c1c;
     }
 }
 .photos{

@@ -1,7 +1,6 @@
 /*** IMPORTS ***/
 
 import {Photographer, displayPhotographersByTag} from './PhotographerClass.js'
-import {shortcutToMain} from './utils.js'
 
 
 
@@ -14,7 +13,15 @@ const skipToContent = document.getElementById("skipToContent");
 
 /*** Ecouteur skip to content ***/
 
-document.addEventListener("keydown", (e) => shortcutToMain(e,skipToContent));
+document.addEventListener("keydown", function shortcutToMain(e){
+    e.preventDefault()
+    if(e.code == 'Tab')
+    {
+        skipToContent.style.display = "block";
+        skipToContent.focus();
+        document.removeEventListener("keydown", shortcutToMain);
+    }
+});
 
 
 

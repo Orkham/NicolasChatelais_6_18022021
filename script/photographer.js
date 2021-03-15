@@ -64,7 +64,7 @@ fetch("FishEyeDataFR.json")
     let arrayFromMedias = Array.from(medias)
     let lightboxContent = new Lightbox(arrayFromMedias)
 
-    lightboxContent.listenForLightbox()
+    lightboxContent.navigationInLightbox()
 
     /*Fonction tri des photo par popularité, date ou tri*/
 
@@ -81,7 +81,10 @@ fetch("FishEyeDataFR.json")
                         return b.likes - a.likes;
                     });
                     displayMedias(mediasList)
-                    lightboxContent.listenForLightbox()
+                    medias = document.querySelectorAll(".media")
+                    arrayFromMedias = Array.from(medias)
+                    lightboxContent = new Lightbox(arrayFromMedias)
+                    lightboxContent.navigationInLightbox()
                     unsetClass(options, "active")
                     e.target.classList.add("active")
                     break;
@@ -94,7 +97,10 @@ fetch("FishEyeDataFR.json")
                         return 0;
                     });
                     displayMedias(mediasList)
-                    lightboxContent.listenForLightbox()
+                    medias = document.querySelectorAll(".media")
+                    arrayFromMedias = Array.from(medias)
+                    lightboxContent = new Lightbox(arrayFromMedias)
+                    lightboxContent.navigationInLightbox()
                     unsetClass(options, "active")
                     e.target.classList.add("active")
                     break;
@@ -107,7 +113,10 @@ fetch("FishEyeDataFR.json")
                         return 0;
                     });
                     displayMedias(mediasList)
-                    lightboxContent.listenForLightbox()
+                    medias = document.querySelectorAll(".media")
+                    arrayFromMedias = Array.from(medias)
+                    lightboxContent = new Lightbox(arrayFromMedias)
+                    lightboxContent.navigationInLightbox()
                     unsetClass(options, "active")
                     e.target.classList.add("active")
                     break;
@@ -139,6 +148,10 @@ fetch("FishEyeDataFR.json")
             if(tag.target.classList.contains("active")&&tagsList[i]==tag.target){
                 tag.target.classList.remove("active")
                 displayMedias(mediasList)
+                medias = document.querySelectorAll(".media")
+                arrayFromMedias = Array.from(medias)
+                lightboxContent = new Lightbox(arrayFromMedias)
+                lightboxContent.navigationInLightbox()
             } 
             /*Condition de sélection du tag*/
             else if(tagsList[i]==tag.target){ 
@@ -148,7 +161,11 @@ fetch("FishEyeDataFR.json")
                         newMediaList.push(mediasList[j])
                     }
                 }
-            displayMedias(newMediaList);
+                displayMedias(newMediaList);
+                medias = document.querySelectorAll(".media")
+                arrayFromMedias = Array.from(medias)
+                lightboxContent = new Lightbox(arrayFromMedias)
+                lightboxContent.navigationInLightbox()
             }
             /*Gestion des tags précédemment sélectionnés*/
             else if(tagsList[i]!=tag.target){
@@ -156,7 +173,7 @@ fetch("FishEyeDataFR.json")
             }
         }
 
-        lightboxContent.listenForLightbox()
+        lightboxContent.navigationInLightbox()
         likesListener()
         
     }

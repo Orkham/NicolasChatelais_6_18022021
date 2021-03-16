@@ -178,6 +178,10 @@ header ul li button:hover, header ul li button:active {
   }
   .lightbox-modal figure {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .lightbox-modal__box--photo {
     object-fit: cover;

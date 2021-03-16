@@ -44,14 +44,17 @@ export class Lightbox{
         },
         
 
-/*Méthode d'écoute pour affichage de la lightbox appelé après chaque tri*/
+/*Fonction d'écoute pour affichage de la lightbox appelé après chaque tri*/
 
         this.navigationInLightbox = function(){
             
-            let medias = Array.from(document.querySelectorAll(".media"))
-            let lightboxContent = new Lightbox(medias)
-            let maxMediaIndex = medias.length
             let mediaIndex = 0;
+            
+            let medias = Array.from(document.querySelectorAll(".media"))
+            
+            let lightboxContent = new Lightbox(medias)
+            
+            let maxMediaIndex = medias.length
 
             medias.forEach(media => {        
                 media.addEventListener("click", ()=>{ 
@@ -167,4 +170,3 @@ function displayVerticalScrollBar(bool){
         body.style.overflowY = "hidden"
     }
 }
-

@@ -85,12 +85,9 @@ function validate(e){
 function checkForm(){
     let results = {}
     checkMessage(messageContent);
-    checkEmail(email.value);
-    checkLast(lastName.value);
-    checkFirst(firstName.value);
-    results.firstName = checkFirst(firstName.value)
-    results.lastName = checkLast(lastName.value)
-    results.email = checkEmail(email.value)
+    results.email = checkEmail(email.value);
+    results.lastName = checkLast(lastName.value);
+    results.firstName = checkFirst(firstName.value);
     return results
 }
 
@@ -158,7 +155,7 @@ function checkEmail(mail){
 
 /*** VERIFICATION MESSAGE ***/
 function checkMessage(message){
-    if(message.textLength > 0){
+    if(message.textLength > 20){
         document.getElementById("missingMessage").style.display = "none";
         messageValidate = true;
     }else{
@@ -202,7 +199,7 @@ function giveFocus(){
 
 focusableItems[5].addEventListener("blur", giveFocus);
                 
-form.addEventListener('keyup', function (event) {
+form.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
         closeForm();
     }
@@ -211,7 +208,7 @@ form.addEventListener('keyup', function (event) {
     }
   });
 
-  validateWindow.addEventListener('keyup', function(event){
+  validateWindow.addEventListener('keydown', function(event){
       if(event.key === 'Escape' || event.key === 'Enter'){
         closeValidateWindow();
       }

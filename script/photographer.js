@@ -1,5 +1,5 @@
 import {Lightbox} from './LightboxClass.js'
-import {Factory, displayMedias, likesListener} from './MediaClass.js'
+import {Factory, displayMedias} from './MediaClass.js'
 import {Photographer} from './PhotographerClass.js'
 import {DisplayBySort} from './DisplayBySortClass.js'
 import {DisplayByTag} from './DisplayByTagClass.js'
@@ -79,10 +79,5 @@ fetch("FishEyeDataFR.json")
 
     DisplayByTag.listenerForEachTag(mediasList)
     
-
-
-    /*Gestion des likes*/
-
-    likesListener()
 })
 

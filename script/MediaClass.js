@@ -12,7 +12,8 @@ export class Factory{
         }else if(media.video){
             return new Video(media)
         }
-}}
+    }
+}
 
 /**
  * @param {object} media - Media fourni par la Factory

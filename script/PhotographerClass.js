@@ -133,7 +133,7 @@ export class Photographer {
 
 export function displayPhotographersByTag(tag, tags, list){
 
-    const articlesList = document.getElementById("photographers").children;
+    const photographersList = document.getElementById("photographers").children;
     const photographersSection = document.getElementById("photographers");
     let tagSelected = tag.target.textContent.toLowerCase();
 
@@ -150,12 +150,12 @@ export function displayPhotographersByTag(tag, tags, list){
     /*Faire correspondre les tags sélectionnés et l'affichage*/
 
     if(tag.target.classList.contains("active")){
-        for(let i = 0 ; i < articlesList.length ; i++){
+        for(let i = 0 ; i < photographersList.length ; i++){
 
             if((list[i].tags).includes(tagSelected.substring(1))){
-                articlesList[i].style.display = "flex";
+                photographersList[i].style.display = "flex";
             }else{
-                articlesList[i].style.display = "none";
+                photographersList[i].style.display = "none";
             }
         }
     }else{

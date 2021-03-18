@@ -1,10 +1,10 @@
-
 import {Lightbox} from './LightboxClass.js'
 import {Factory, displayMedias, likesListener} from './MediaClass.js'
 import {Photographer} from './PhotographerClass.js'
-import {Display} from './DisplayClass.js'
+import {DisplayBySort} from './DisplayBySortClass.js'
+import {DisplayByTag} from './DisplayByTagClass.js'
 
-const photosSection = document.getElementById("photosSection");
+//const photosSection = document.getElementById("photosSection");
 
 /*Récupération des données du fichiers json data*/
 
@@ -71,62 +71,16 @@ fetch("FishEyeDataFR.json")
 
     /*Fonction tri des photo par popularité, date ou tri*/
 
-    Display.displayBySort(mediasList)
+    DisplayBySort.displayBySort(mediasList)
     
 
 
     /*Filtre des medias par tag*/
 
-    let tagsList = document.querySelectorAll(".tag");
- 
-    for(let i = 0 ; i < tagsList.length ; i++){
-        tagsList[i].addEventListener("click", displayByTag);
-    }
+    DisplayByTag.listenerForEachTag(mediasList)
     
-    function displayByTag(tag){
 
-        photosSection.innerHTML = ""
-        
-        let tagSelected = tag.target.textContent.toLowerCase();
 
-        /*Faire correspondre les tags sélectionnés et l'affichage*/
-        let newMediaList =[]
-
-        for(let i = 0 ; i < tagsList.length ; i++){
-            /*Conditions pour désélectionner le tag déjà sélectionné*/
-            if(tag.target.classList.contains("active")&&tagsList[i]==tag.target){
-                tag.target.classList.remove("active")
-                displayMedias(mediasList)
-                medias = document.querySelectorAll(".media")
-                arrayFromMedias = Array.from(medias)
-                lightboxContent = new Lightbox(arrayFromMedias)
-                lightboxContent.navigationInLightbox()
-            } 
-            /*Condition de sélection du tag*/
-            else if(tagsList[i]==tag.target){ 
-                tag.target.classList.add("active")
-                for(let j = 0 ; j < mediasList.length ; j++){
-                    if((mediasList[j].tags).includes(tagSelected.substring(1))){
-                        newMediaList.push(mediasList[j])
-                    }
-                }
-                displayMedias(newMediaList);
-                medias = document.querySelectorAll(".media")
-                arrayFromMedias = Array.from(medias)
-                lightboxContent = new Lightbox(arrayFromMedias)
-                lightboxContent.navigationInLightbox()
-            }
-            /*Gestion des tags précédemment sélectionnés*/
-            else if(tagsList[i]!=tag.target){
-                tagsList[i].classList.remove("active")
-            }
-        }
-
-        lightboxContent.navigationInLightbox()
-        likesListener()
-        
-    }
-    
     /*Gestion des likes*/
 
     likesListener()

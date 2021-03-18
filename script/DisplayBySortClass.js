@@ -5,7 +5,7 @@ import {unsetClass} from './utils.js'
 
 const photosSection = document.getElementById("photosSection");
 
-export class Display{
+export class DisplayBySort{
     
     static displayBySort(mediasList){
         let options = document.querySelectorAll(".options")
@@ -65,7 +65,5 @@ export class Display{
         unsetClass(options, "active")
         e.target.classList.add("active")
     }
-    
-    
-
+  
 }

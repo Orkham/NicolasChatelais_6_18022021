@@ -38,12 +38,7 @@ fetch("FishEyeDataFR.json")
 
     const photographersArray = response.photographers;
     
-    return photographersArray;
-
-})
-
 /*Création d'un tableau contenant la liste de tous les photographes et leurs données*/
-.then((photographersArray)=>{
 
     let photographersList = [];
 
@@ -67,12 +62,9 @@ fetch("FishEyeDataFR.json")
    
     for(let i = 0 ; i < tags.length ; i++){
         tags[i].addEventListener("click", (e)=>{
-            displayPhotographersByTag(e,tags,photographersList)
-        }
-        );
+            displayPhotographersByTag(e, tags, photographersList)
+        });
     }
-    
-
     
 });
 

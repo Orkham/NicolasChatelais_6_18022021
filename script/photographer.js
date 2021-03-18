@@ -2,7 +2,7 @@
 import {Lightbox} from './LightboxClass.js'
 import {Factory, displayMedias, likesListener} from './MediaClass.js'
 import {Photographer} from './PhotographerClass.js'
-import {unsetClass} from './utils.js'
+import {Display} from './DisplayClass.js'
 
 const photosSection = document.getElementById("photosSection");
 
@@ -12,6 +12,7 @@ fetch("FishEyeDataFR.json")
 .then(response=>response.json())
 
 /*Récupération liste des photographes*/
+
 .then((response)=> {
 
     /*Récupération de l'id du photographe passée dans l'url*/
@@ -66,68 +67,16 @@ fetch("FishEyeDataFR.json")
 
     lightboxContent.navigationInLightbox()
 
+
+
     /*Fonction tri des photo par popularité, date ou tri*/
 
-    let options = document.querySelectorAll(".options")
+    Display.displayBySort(mediasList)
     
-    options.forEach(option=>{
-        option.addEventListener("click",(e)=>{
-
-            photosSection.innerHTML = "";
-            
-            switch(e.target.name){
-                case "popularité":
-                    mediasList.sort(function(a,b){
-                        return b.likes - a.likes;
-                    });
-                    displayMedias(mediasList)
-                    medias = document.querySelectorAll(".media")
-                    arrayFromMedias = Array.from(medias)
-                    lightboxContent = new Lightbox(arrayFromMedias)
-                    lightboxContent.navigationInLightbox()
-                    unsetClass(options, "active")
-                    e.target.classList.add("active")
-                    break;
-                case "date":
-                    mediasList.sort(function(a,b){
-                        if (a.date < b.date)
-                            return -1;
-                        if (a.date > b.date)
-                            return 1;
-                        return 0;
-                    });
-                    displayMedias(mediasList)
-                    medias = document.querySelectorAll(".media")
-                    arrayFromMedias = Array.from(medias)
-                    lightboxContent = new Lightbox(arrayFromMedias)
-                    lightboxContent.navigationInLightbox()
-                    unsetClass(options, "active")
-                    e.target.classList.add("active")
-                    break;
-                case "titre":
-                    mediasList.sort(function(a,b){
-                        if (a.title < b.title)
-                            return -1;
-                        if (a.title > b.title )
-                            return 1;
-                        return 0;
-                    });
-                    displayMedias(mediasList)
-                    medias = document.querySelectorAll(".media")
-                    arrayFromMedias = Array.from(medias)
-                    lightboxContent = new Lightbox(arrayFromMedias)
-                    lightboxContent.navigationInLightbox()
-                    unsetClass(options, "active")
-                    e.target.classList.add("active")
-                    break;
-            }
-        })
-    })
 
 
+    /*Filtre des medias par tag*/
 
-
-                    /*Filtre des medias par tag*/
     let tagsList = document.querySelectorAll(".tag");
  
     for(let i = 0 ; i < tagsList.length ; i++){

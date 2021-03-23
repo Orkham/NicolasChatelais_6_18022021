@@ -51,6 +51,7 @@ export class DisplayBySort{
                 this.displaySelectSelected(e, options)
                 break;
         }
+        likesListener()
     }
 
     static displayMediasAfterSort(mediasList){

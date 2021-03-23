@@ -4,6 +4,7 @@ import {displayMedias, likesListener} from './MediaClass.js'
 import {unsetClass} from './utils.js'
 
 const photosSection = document.getElementById("photosSection");
+const tagList = document.getElementById("tagList").childNodes
 
 export class DisplayBySort{
     
@@ -52,6 +53,10 @@ export class DisplayBySort{
                 break;
         }
         likesListener()
+        
+        for (let i = 0 ; i < (tagList.length) ; i++){
+            unsetClass(tagList[i].childNodes, 'active')
+        }
     }
 
     static displayMediasAfterSort(mediasList){
